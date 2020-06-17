@@ -24,7 +24,8 @@ export default [
         code: 200,
         data: {
           token: token,
-          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80'
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
+          role: 'admin'
         },
         msg: '登陆成功'
       }

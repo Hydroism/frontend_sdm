@@ -23,8 +23,8 @@ const errorMsg = (message: string) => {
 
 
 service.interceptors.request.use(config => {
-  if (store.getters.token) {
-    config.headers['Authorization'] = `JWT ${store.getters.token}`;
+  if (store.getters['user/token']) {
+    config.headers['Authorization'] = `JWT ${store.getters['user/token']}`;
   }
   return config
 }, function (error) {

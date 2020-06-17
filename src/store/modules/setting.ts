@@ -9,7 +9,7 @@ const state = {
   showSettings: showSettings,
   tagsView: tagsView,
   fixedHeader: fixedHeader,
-  sidebarLogo: sidebarLogo
+  sidebarLogo: sidebarLogo,
 };
 
 const mutations = {};
@@ -17,7 +17,10 @@ const mutations = {};
 const actions = {};
 
 const getters = {
-  theme: (state: any) => state.theme
+  theme: (state: any) => state.theme,
+  fixedHeader: (state: any) => state.fixedHeader,
+  sidebarLogo: (state: any) => state.sidebarLogo,
+
 };
 
 export default {

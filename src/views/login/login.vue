@@ -86,8 +86,8 @@ export default class login extends Vue {
     this.loading = true;
 
     try {
-      await userService.postLogin(this.loginFormData);
-      await routerService.getRoleRouter();
+      await this.$store.dispatch('user/login', this.loginFormData);
+      await this.$store.dispatch('permission/getRoleRouter');
 
       await this.$router.push({path: this.redirect || '/', query: this.otherQuery});
       this.loading = false
@@ -119,7 +119,7 @@ export default class login extends Vue {
   .login-container {
     height: 100vh;
     min-height: 600px;
-    background: url("/static/login_images/background.jpg") center center fixed no-repeat;
+    background: url("~@/assets/login_images/background.jpg") center center fixed no-repeat;
     background-size: cover;
 
     .title {

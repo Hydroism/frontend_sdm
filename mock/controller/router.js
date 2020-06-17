@@ -1,12 +1,13 @@
 const data = [
   {
-    path: '/',
+    path: '',
     children: [
       {
-        path: '',
+        path: '/home',
+        name: 'about',
         meta: {
           title: '首页',
-          icon: 'home',
+          icon: 'edit',
           affix: true
         }
       }
@@ -14,22 +15,69 @@ const data = [
   },
   {
     path: '/error',
+    name: 'error',
     meta: {
-      title: '错误页',
+      title: '错误页错误页',
       icon: 'bug'
     },
     children: [
       {
         path: '/401',
+        name: 'about2',
         meta: {
           title: '401',
-          icon: 'edit'
-        }
+        },
+        children: [
+          {
+            path: '/asdf',
+            name: 'about212',
+            meta: {
+              title: '首页1',
+              icon: 'edit',
+              affix: true
+            }
+          },
+          {
+            path: '/wer',
+            name: 'about22',
+            meta: {
+              title: '首页2',
+              affix: true
+            }
+          },
+        ]
       },
       {
         path: '/404',
+        name: '404',
         meta: {
           title: '404',
+          icon: 'list'
+        }
+      }
+    ]
+  },
+  {
+    path: '/error2',
+    name: 'error2',
+    meta: {
+      title: '错误页22',
+      icon: 'bug'
+    }
+  },
+  {
+    path: '/layout',
+    name: 'error2',
+    meta: {
+      title: '错误页22',
+      icon: 'bug'
+    },
+    children: [
+      {
+        path: '/401',
+        name: '401',
+        meta: {
+          title: '错误404',
           icon: 'list'
         }
       }

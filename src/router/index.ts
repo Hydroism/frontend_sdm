@@ -10,6 +10,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: 'hash',
   base: process.env.BASE_URL,
+  scrollBehavior: () => ({x: 0, y: 0}),
   routes
 });
 
@@ -26,6 +27,8 @@ router.beforeEach((to, from, next) => {
     } else {
       next()
     }
+  } else {
+    next()
   }
 
 });
