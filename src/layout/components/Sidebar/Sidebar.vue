@@ -1,10 +1,10 @@
 <template>
   <div :class="{'has-logo':isShowLogo}">
-    <logo v-if="isShowLogo" :isCollapse="isCollapse"/>
+    <logo v-if="isShowLogo" :isCollapse="collapse"/>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
         :default-active="activeMenu"
-        :collapse="isCollapse"
+        :collapse="collapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
@@ -53,7 +53,7 @@ export default class Sidebar extends Vue {
     return path
   };
 
-  get isCollapse() {
+  get collapse() {
     return this.isCollapse
   };
 

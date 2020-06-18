@@ -1,11 +1,10 @@
 import {ActionContext} from "vuex";
 import {RouteConfig} from "vue-router";
 import routerService from "@/api/routerService";
-
+import {filterAsyncRoutes} from "@/router/handleRoutes";
 
 const state = {
   routes: [],
-
 };
 
 const mutations = {
@@ -19,7 +18,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       routerService.getRoleRouter().then(res => {
         const routes = res.data;
-        commit('SET_ROUTES', routes);
+        commit('SET_ROUTES', filterAsyncRoutes(routes));
         resolve()
       }).catch(err => {
         reject(err)

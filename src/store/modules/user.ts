@@ -39,7 +39,7 @@ const actions = {
     }))
   },
 
-  logout({commit}:ActionContext<any, any>){
+  logout({commit}: ActionContext<any, any>) {
     commit('SET_TOKEN', '');
     commit('SET_AVATAR', '');
     commit('SET_ROLE', '');
@@ -50,6 +50,7 @@ const actions = {
 
 const getters = {
   token: (state: any) => state.token,
+  role: (state: any) => state.role
 };
 
 export default {

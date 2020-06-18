@@ -62,7 +62,7 @@ export const asyncRoutes: Array<RouteConfig> = [
       {
         path: '401',
         name: '401',
-        component: Layout,
+        component: () => import('@/views/nested/index.vue'),
         children:[
           {
             path: 'asdf',
