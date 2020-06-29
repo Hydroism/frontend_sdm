@@ -17,7 +17,7 @@ const mutations = {
   CLOSE_SIDEBAR: (state: any) => {
     state.isCollapse = true;
   },
-  TOGGLE_DEVICE: (state: any, device: string) => {
+  TOGGLE_DEVICE: (state: any, device: DeviceEnum) => {
     state.device = device
   },
 

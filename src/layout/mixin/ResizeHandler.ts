@@ -3,7 +3,6 @@ import {Vue, Component, Watch} from "vue-property-decorator";
 import {namespace} from "vuex-class";
 
 const WIDTH = 992 // refer to Bootstrap's responsive design
-
 const appModule = namespace('app');
 
 @Component
@@ -27,7 +26,7 @@ export default class ResizeHandler extends Vue {
     window.removeEventListener('resize', this.$_resizeHandler)
   };
 
-  // 不存在该情况
+  // 不存在该情况,created()已经能够处理了。
   // @Watch('$route')
   // onRouteChange(): void {
   //   if (this.device === DeviceEnum.mobile && this.isCollapse) {

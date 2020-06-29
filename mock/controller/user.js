@@ -25,9 +25,24 @@ export default [
         data: {
           token: token,
           avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
-          role: 'admin'
+          roles: ['admin']
         },
-        msg: '登陆成功'
+        msg: 'login successful'
+      }
+    }
+  },
+  {
+    url: 'mock/user/userInfo',
+    type:'get',
+    response:config => {
+      return {
+        code: 200,
+        data: {
+          token: 'admin-accessToken',
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80',
+          roles: ['admin']
+        },
+        msg: 'getUserInfo by token'
       }
     }
   }

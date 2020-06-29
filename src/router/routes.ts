@@ -85,4 +85,4 @@ export const asyncRoutes: Array<RouteConfig> = [
   }
 ];
 
-export default [...constantRoutes, ...asyncRoutes]
+export default [...constantRoutes]

@@ -9,9 +9,9 @@ export default {
 
   /**
    * @type {boolean} true | false
-   * @description Whether need tagsView
+   * @description Whether need tagsBar
    */
-  tagsView: true,
+  tagsBar: true,
 
   /**
    * @type {boolean} true | false

@@ -1,13 +1,14 @@
-import { DeviceEnum } from "@/store/modules/app";
-import { DeviceEnum } from "@/store/modules/app";
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="isMobile&&!isCollapse" class="drawer-bg" @click="handleClickOutside"/>
     <sidebar class="sidebar-container"/>
+
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
         <navbar/>
+        <tags-bar v-if="needTagsBar" />
       </div>
+
       <app-main/>
     </div>
   </div>
@@ -21,16 +22,18 @@ import { DeviceEnum } from "@/store/modules/app";
   import Navbar from "@/layout/components/Navbar/Navbar.vue";
   import {namespace} from "vuex-class";
   import {DeviceEnum} from "@/store/modules/app";
+  import TagsBar from "@/layout/components/TagsBar/TagsBar.vue";
 
   const settingModule = namespace('setting');
   const appModule = namespace('app');
 
   @Component({
-    components: {Navbar, Sidebar, AppMain},
+    components: {Navbar, Sidebar, AppMain, TagsBar},
     mixins: [ResizeHandler]
   })
   export default class layout extends Vue {
     @settingModule.Getter('fixedHeader') fixedHeader!: boolean;
+    @settingModule.Getter('tagsBar') needTagsBar!: boolean;
     @appModule.Getter('isCollapse') isCollapse!: boolean;
     @appModule.Getter('device') device!: DeviceEnum;
 

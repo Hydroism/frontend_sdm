@@ -1,7 +1,7 @@
 import {ActionContext} from "vuex";
 import {RouteConfig} from "vue-router";
 import routerService from "@/api/routerService";
-import {filterAsyncRoutes} from "@/router/handleRoutes";
+import {filterAsyncRoutes, filterRoutes} from "@/router/handleRoutes";
 
 const state = {
   routes: [],
@@ -17,9 +17,9 @@ const actions = {
   getRoleRouter({commit}: ActionContext<any, any>) {
     return new Promise((resolve, reject) => {
       routerService.getRoleRouter().then(res => {
-        const routes = res.data;
-        commit('SET_ROUTES', filterAsyncRoutes(routes));
-        resolve()
+        const accessedRoutes = filterRoutes(res.data);
+        commit('SET_ROUTES', accessedRoutes);
+        resolve(accessedRoutes)
       }).catch(err => {
         reject(err)
       })

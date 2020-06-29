@@ -6,6 +6,9 @@ const userService = {
     return post(`mock/user/login`, params)
   },
 
+  getUserInfo():Promise<any>{
+    return get(`mock/user/userInfo`)
+  }
 };
 
 export default userService
