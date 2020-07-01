@@ -14,6 +14,10 @@ export const constantRoutes: Array<RouteConfig> = [
     path: '/404',
     component: () => import('@/views/error-page/404.vue')
   },
+  // {
+  //   path: '*',
+  //   redirect:'/404'
+  // },
 ];
 
 

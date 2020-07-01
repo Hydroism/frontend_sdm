@@ -35,5 +35,6 @@ export default class Breadcrumb extends Vue {
     font-size: 14px;
     line-height: 50px;
     margin-left: 8px;
+    user-select: none;
   }
 </style>

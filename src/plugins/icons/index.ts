@@ -1,4 +1,4 @@
-import SvgIcon from "@/components/SvgIcon.vue";
+import SvgIcon from "@/components/SvgIcon/SvgIcon.vue";
 import Vue from 'vue'
 
 // register globally

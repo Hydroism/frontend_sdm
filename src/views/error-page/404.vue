@@ -32,7 +32,7 @@
             <div class="bullshit-oops">{{ oops }}</div>
             <div class="bullshit-headline">{{ headline }}</div>
             <div class="bullshit-info">{{ info }}</div>
-            <a class="bullshit-return-home" href="/">
+            <a class="bullshit-return-home" href="#/home">
               {{ jumpTime }}s&nbsp;{{ btn }}
             </a>
           </div>
@@ -52,7 +52,7 @@ export default class Page404 extends Vue{
   headline:string = "当前页面不存在...";
   info:string = "请检查您输入的网址是否正确，或点击下面的按钮返回首页。";
   btn:string = "返回首页";
-  timer:number = 0;
+  timer:any = null;
 
   mounted() {
     this.timeChange();
@@ -67,7 +67,7 @@ export default class Page404 extends Vue{
       if (this.jumpTime) {
         this.jumpTime--;
       } else {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "home" });
 
         //todo 清空路由
         // this.$store.dispatch("tagsBar/delOthersRoutes", {

@@ -32,7 +32,7 @@
             <div class="bullshit-oops">{{ oops }}</div>
             <div class="bullshit-headline">{{ headline }}</div>
             <div class="bullshit-info">{{ info }}</div>
-            <a class="bullshit-return-home" href="/">
+            <a class="bullshit-return-home" href="#/home">
               {{ jumpTime }}s&nbsp;{{ btn }}
             </a>
           </div>
@@ -52,7 +52,7 @@ export default class Page401 extends Vue {
   headline: string = "您没有操作权限...";
   info: string = "当前帐号没有操作权限,请联系管理员。";
   btn: string = "返回";
-  timer: number = 0;
+  timer: any = null;
 
   mounted() {
     this.timeChange();
@@ -67,7 +67,7 @@ export default class Page401 extends Vue {
       if (this.jumpTime) {
         this.jumpTime--;
       } else {
-        this.$router.push({ path: "/" });
+        this.$router.push({ path: "home" });
 
         //todo 清空路由
         // this.$store.dispatch("tagsBar/delOthersRoutes", {

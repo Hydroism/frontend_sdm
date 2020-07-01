@@ -14,7 +14,7 @@ const mutations = {
   },
 
   //关闭单个标签
-  DEL_VISITED_ROUTE(state: any, route: RouteConfig) {
+  DEL_VISITED_ROUTE(state: any, route: Route) {
     for (const [i, v] of state.visitedRoutes.entries()) {
       if (v.path === route.path) {
         state.visitedRoutes.splice(i, 1);
@@ -56,8 +56,9 @@ const actions = {
     commit('UPDATE_VISITED_ROUTES', route)
   },
 
-  delVisitedRoute({commit}: ActionContext<any, any>, route: Route){
-    commit('DEL_VISITED_ROUTE', route)
+  delVisitedRoute({commit, state}: ActionContext<any, any>, route: Route){
+    commit('DEL_VISITED_ROUTE', route);
+    return state.visitedRoutes
   }
 };
 

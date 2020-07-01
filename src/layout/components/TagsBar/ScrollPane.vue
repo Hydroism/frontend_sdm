@@ -5,6 +5,11 @@
 </template>
 
 <script lang="ts">
+/**
+ * 暂时没有用
+ */
+
+
 import {Component, Prop, Vue} from "vue-property-decorator"
 import {Route} from "vue-router";
 

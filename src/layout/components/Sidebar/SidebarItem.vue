@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="user-select: none;">
     <el-submenu v-if="isHaveChildren(item.children, item)" :index="resolvePath(item.path)">
       <template slot="title">
         <item v-if="item.meta" :icon="item.meta.icon" :title="item.meta.title"/>

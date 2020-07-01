@@ -1,27 +1,22 @@
-import path from "path";
 <template>
   <div class="tags-bar-container">
-    <!--    <scroll-pane ref="scrollPane" class="tags-bar-wrapper">-->
-    <!--      <router-link-->
-    <!--        class="tags-bar-item" tag="span" ref="tag" :class="isActive(item)?'active':''"-->
-    <!--        :to="{ path: item.path, query: item.query, fullPath: item.fullPath }"-->
-    <!--      >-->
-    <!--        {{ item.title }}-->
-    <!--        <span v-if="!isAffix(item)" class="el-icon-close"/>-->
-    <!--      </router-link>-->
-    <!--    </scroll-pane>-->
-
     <!--    todo 超过容器的情况-->
     <el-tabs
       type="card" class="tags-content" v-model="tabActive" :stretch="false"
       @tab-click="handleTabClick" @tab-remove="handleTabRemove"
+      @contextmenu.prevent.native="openMenu"
     >
       <el-tab-pane
         v-for="item in visitedRoutes" :key="item.path"
         :label="item.title" :name="item.path" :closable="!isAffix(item)"
-        @click.native="handleTabItem"
       />
     </el-tabs>
+
+    <!--todo 右键菜单-->
+    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
+      <li>Refresh</li>
+      <li>Close</li>
+    </ul>
 
   </div>
 </template>
@@ -31,7 +26,7 @@ import {Component, Prop, Vue, Watch} from "vue-property-decorator"
 import ScrollPane from "./ScrollPane.vue";
 import {namespace} from "vuex-class";
 import {VisitedRoute} from "@/store/modules/tagsBar";
-import {RouteConfig} from "vue-router";
+import {Route, RouteConfig} from "vue-router";
 import path from "path"
 
 const tagsBarModule = namespace('tagsBar');
@@ -45,10 +40,23 @@ export default class TagsBar extends Vue {
   affixTags: RouteConfig[] = [];
   tabActive: string = '';
 
+  visible: boolean = false;
+  left: number = 0;
+  top: number = 0;
+
   @Watch('$route')
   onRouteChange(): void {
     this.addTags();
     this.tabActive = this.$route.path
+  }
+
+  @Watch('visible')
+  onVisibleChange(value:boolean):void{
+    // if (value) {
+    //   document.body.addEventListener('click', this.closeMenu)
+    // } else {
+    //   document.body.removeEventListener('click', this.closeMenu)
+    // }
   }
 
   mounted(): void {
@@ -84,7 +92,6 @@ export default class TagsBar extends Vue {
     routes.forEach(route => {
       if (route.meta && route.meta.affix) {
         const tagPath = path.resolve(basePath, route.path);
-        console.log(tagPath);
         tags.push({
           fullPath: tagPath,
           path: tagPath,
@@ -109,30 +116,12 @@ export default class TagsBar extends Vue {
     }
   };
 
-  // moveToCurrentTag() {
-  //   const tags: any = this.$refs.tag;
-  //   this.$nextTick(() => {
-  //     for (const tag of tags) {
-  //       if (tag.to.path === this.$route.path) {
-  //         //@ts-ignore
-  //         this.$refs.scrollPane.moveToTarget(tag);
-  //
-  //         // when query is different then update
-  //         if (tag.to.fullPath !== this.$route.fullPath) {
-  //           this.$store.dispatch("tagsBar/updateVisitedRoute", this.$route);
-  //         }
-  //         break;
-  //       }
-  //     }
-  //   });
-  // };
-
   handleTabClick(): void {
-    if (this.$route.path === this.tabActive) {
+    if (this.isActive()) {
       return
     }
-    const route: VisitedRoute | undefined = this.visitedRoutes.find(item => {
-      return item.path === this.tabActive
+    const route: VisitedRoute | undefined = this.visitedRoutes.find(e => {
+      return e.path === this.tabActive
     });
     this.$router.push({
       path: route && route.path,
@@ -140,66 +129,138 @@ export default class TagsBar extends Vue {
     })
   };
 
-  handleTabRemove(tab: any): void {
-    this.$store.dispatch('tagsBar/delVisitedRoute');
-    // if (this.isActive) {
-    //
-    // }
-
+  async handleTabRemove(tab: any) {
+    const route: VisitedRoute | undefined = this.visitedRoutes.find(e => {
+      return tab === e.path
+    });
+    const visitedRoutes = await this.$store.dispatch('tagsBar/delVisitedRoute', route);
+    if (this.isActive()) {
+      this.toLastView(visitedRoutes, route as VisitedRoute)
+    }
   };
 
-  handleTabItem() {
-    console.log("YY");
+  toLastView(visitedRoutes: VisitedRoute[], view: Route) {
+    const latestView = visitedRoutes.slice(-1)[0];
+    if (latestView) {
+      this.$router.push(latestView.fullPath);
+    } else {
+      this.$router.push('/')
+    }
   };
+
+  openMenu(e:any) {
+    const menuMinWidth = 105;
+    const offsetLeft = this.$el.getBoundingClientRect().left // container margin left
+    //@ts-ignore
+    const offsetWidth = this.$el.offsetWidth // container width
+    const maxLeft = offsetWidth - menuMinWidth // left boundary
+    const left = e.clientX - offsetLeft + 15 // 15: margin right
+
+    if (left > maxLeft) {
+      this.left = maxLeft
+    } else {
+      this.left = left
+    }
+
+    this.top = e.clientY
+    this.visible = true
+  };
+
+  closeMenu() {
+    this.visible = false
+  }
 }
 
 </script>
 
 <style scoped lang='scss'>
+  $base-tag-item-height: 30px;
+
   .tags-bar-container {
-    height: 34px;
+    height: 42px;
     width: 100%;
     background: #fff;
     border-bottom: 1px solid #d8dce5;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+    user-select: none;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: $base-padding;
+    padding-right: $base-padding;
 
-    .tags-bar-item {
-      display: inline-block;
-      position: relative;
-      cursor: pointer;
-      height: 26px;
-      line-height: 26px;
-      border: 1px solid #d8dce5;
-      color: #495060;
-      background: #fff;
-      padding: 0 8px;
-      font-size: 12px;
-      margin-left: 5px;
-      margin-top: 4px;
+    .tags-content {
+      width: calc(100% - 90px);
+      height: $base-tag-item-height;
 
-      &:first-of-type {
-        margin-left: 15px;
-      }
-
-      &:last-of-type {
-        margin-right: 15px;
-      }
-
-      &.active {
-        background-color: #42b983;
-        color: #fff;
-        border-color: #42b983;
-
-        &::before {
-          content: '';
-          background: #fff;
-          display: inline-block;
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          position: relative;
-          margin-right: 2px;
+      ::v-deep {
+        .el-tabs__nav-next,
+        .el-tabs__nav-prev {
+          height: $base-tag-item-height;
+          line-height: $base-tag-item-height;
         }
+
+        .el-tabs__header {
+          border-bottom: 0;
+
+          .el-tabs__nav {
+            border: 0;
+          }
+
+          .el-tabs__item {
+            height: $base-tag-item-height;
+            line-height: $base-tag-item-height;
+            border: 1px solid $base-border-color;
+            margin-right: 5px;
+            border-radius: $base-border-radius;
+            box-sizing: border-box;
+
+            &.is-active {
+              background: $base-color-blue;
+              color: $base-color-white;
+              border: 1px solid $base-color-blue;
+            }
+
+            .el-icon-close {
+              position: relative;
+              font-size: 12px;
+              width: 0;
+              height: 14px;
+              vertical-align: middle;
+              line-height: 14px;
+              overflow: hidden;
+              top: -1px;
+              right: -2px;
+              transform-origin: 100% 50%;
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .contextmenu {
+    margin: 0;
+    background: #fff;
+    z-index: 3000;
+    position: absolute;
+    list-style-type: none;
+    padding: 5px 0;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+
+    li {
+      margin: 0;
+      padding: 7px 16px;
+      cursor: pointer;
+
+      &:hover {
+        background: #eee;
       }
     }
   }
