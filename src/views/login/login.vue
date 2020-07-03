@@ -74,8 +74,7 @@ export default class login extends Vue {
   }
 
   handleLogin(): void {
-    const loginFormRef: any = this.$refs.loginForm;
-    loginFormRef.validate((valid: boolean) => {
+    (this.$refs.loginForm as any).validate((valid: boolean) => {
       if (valid) {
         this.submitForm();
       }
@@ -97,10 +96,9 @@ export default class login extends Vue {
   };
 
   showPwd(): void {
-    const pswRef: any = this.$refs.password;
     this.passwordType = this.passwordType === 'password' ? '' : 'password';
     this.$nextTick(() => {
-      pswRef.focus();
+      (this.$refs.password as HTMLElement).focus();
     })
   };
 

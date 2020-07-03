@@ -1,13 +1,15 @@
 import Mock from 'mockjs'
 import { param2Obj } from './utils'
-import user from "./controller/user";
-import router from "./controller/router";
+const requireContext = require('require-context');
+const path = require('path');
 
+const mocks = [];
+const files = requireContext(path.join(__dirname, "./controller"), false, /\.js$/);
 
-const mocks = [
-  ...user,
-  ...router
-]
+files.keys().forEach((key) => {
+  const obj = files(key).default;
+  mocks.push(...obj);
+});
 
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,

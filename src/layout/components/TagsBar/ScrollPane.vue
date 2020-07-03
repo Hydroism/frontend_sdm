@@ -28,8 +28,7 @@ export default class ScrollPane extends Vue {
   };
 
   get scrollWrapper() {
-    //@ts-ignore
-    return this.$refs.scrollContainer.$refs.wrap
+    return (this.$refs.scrollContainer as any).$refs.wrap
   };
 
   emitScroll() {
@@ -38,8 +37,7 @@ export default class ScrollPane extends Vue {
 
   //todo 过长后的scroll以后再搞，现在数据太少
   moveToTarget(currentTag: Route) {
-    //@ts-ignore
-    const $container: HTMLElement = this.$refs.scrollContainer.$el;
+    const $container: HTMLElement = (this.$refs.scrollContainer as any).$el;
     const $containerWidth: number = $container.offsetWidth;
     const $scrollWrapper: HTMLElement = this.scrollWrapper;
     const tagList: any = this.$parent.$refs.tag;

@@ -71,7 +71,7 @@ export default class RightPanel extends Vue {
     text-align: center;
     font-size: 24px;
     border-radius: 6px 0 0 6px !important;
-    z-index: 0;
+    z-index: 2000;
     pointer-events: auto;
     cursor: pointer;
     color: #fff;

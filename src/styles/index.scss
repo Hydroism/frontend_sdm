@@ -48,7 +48,7 @@ html {
     margin: 0;
     font-size: $base-font-size-default;
     font-weight: 400;
-    background: #f6f8f9;
+    //background: #f6f8f9;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 
@@ -64,4 +64,18 @@ html {
       }
     }
   }
+}
+
+
+//main-container全局样式
+.app-container {
+  padding: 20px;
+}
+
+.flr{
+  float: right;
+}
+
+.fll{
+  float: left;
 }

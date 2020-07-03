@@ -1,6 +1,6 @@
 const data = [
   {
-    path: '/',
+    path: '',
     component: 'Layout',
     meta: {
       title: '首页Layout',
@@ -8,7 +8,7 @@ const data = [
     },
     children: [
       {
-        path: 'home',
+        path: '/home',
         name: 'home',
         component: 'Home',
         meta: {
@@ -17,13 +17,40 @@ const data = [
         }
       },
       {
-        path: 'about',
+        path: '/about',
         name: 'about',
         component: 'About',
         meta: {
           title: '首页2',
           icon: 'edit',
           noCache:true
+        }
+      }
+    ]
+  },
+  {
+    path:'/permission',
+    component:'Layout',
+    meta:{
+      title:'权限管理',
+      icon:'edit'
+    },
+    children:[
+      {
+        path:'roleManagement',
+        name:'roleManagement',
+        component:'permission/roleManagement',
+        meta:{
+          title:'角色管理',
+          affix: true
+        }
+      },
+      {
+        path:'menuManagement',
+        name:'menuManagement',
+        component:'permission/menuManagement',
+        meta:{
+          title:'菜单管理'
         }
       }
     ]
@@ -37,7 +64,7 @@ const data = [
     },
     children: [
       {
-        path: '',
+        path: '/home23',
         name: 'about2',
         component: 'Home',
         meta: {
@@ -46,7 +73,7 @@ const data = [
         }
       },
       {
-        path: 'about',
+        path: '/about234',
         name: 'about',
         component: 'About',
         meta: {
@@ -88,8 +115,7 @@ const data = [
             component: 'views/About',
             meta: {
               title: '首页9',
-              icon: 'edit',
-              affix: true
+              icon: 'edit'
             }
           },
           {

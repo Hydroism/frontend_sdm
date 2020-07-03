@@ -58,12 +58,12 @@
       width: 100% !important;
     }
 
-    //
     // menu hover
     .submenu-title-noDropdown,
     .el-submenu__title {
       &:hover {
         background-color: $menu-hover !important;
+        color: $menu-color-hover !important;
       }
     }
 

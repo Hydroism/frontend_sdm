@@ -52,11 +52,11 @@ export default class TagsBar extends Vue {
 
   @Watch('visible')
   onVisibleChange(value:boolean):void{
-    // if (value) {
-    //   document.body.addEventListener('click', this.closeMenu)
-    // } else {
-    //   document.body.removeEventListener('click', this.closeMenu)
-    // }
+    if (value) {
+      document.body.addEventListener('click', this.closeMenu)
+    } else {
+      document.body.removeEventListener('click', this.closeMenu)
+    }
   }
 
   mounted(): void {
@@ -69,8 +69,8 @@ export default class TagsBar extends Vue {
     return this.$store.getters['permission/routes']
   };
 
-  isActive(): boolean {
-    return this.tabActive === this.$route.path
+  isActive(path:string): boolean {
+    return this.$route.path === path
   };
 
   isAffix(tag: VisitedRoute): boolean {
@@ -116,8 +116,8 @@ export default class TagsBar extends Vue {
     }
   };
 
-  handleTabClick(): void {
-    if (this.isActive()) {
+  handleTabClick(tab:string): void {
+    if (this.isActive(this.tabActive)) {
       return
     }
     const route: VisitedRoute | undefined = this.visitedRoutes.find(e => {
@@ -134,7 +134,8 @@ export default class TagsBar extends Vue {
       return tab === e.path
     });
     const visitedRoutes = await this.$store.dispatch('tagsBar/delVisitedRoute', route);
-    if (this.isActive()) {
+
+    if (this.isActive(tab)) {
       this.toLastView(visitedRoutes, route as VisitedRoute)
     }
   };
@@ -162,7 +163,7 @@ export default class TagsBar extends Vue {
       this.left = left
     }
 
-    this.top = e.clientY
+    this.top = e.clientY;
     this.visible = true
   };
 
@@ -177,7 +178,7 @@ export default class TagsBar extends Vue {
   $base-tag-item-height: 30px;
 
   .tags-bar-container {
-    height: 42px;
+    height: $base-tags-bar-height;
     width: 100%;
     background: #fff;
     border-bottom: 1px solid #d8dce5;

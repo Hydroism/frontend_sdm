@@ -25,7 +25,7 @@ export default class Navbar extends Vue {
 
 <style scoped lang='scss'>
 .nav-bar{
-  height: 50px;
+  height: $base-nav-bar-height;
   overflow: hidden;
   position: relative;
   background: #fff;

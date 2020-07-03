@@ -1,3 +1,4 @@
+import path from "path";
 <template>
   <div style="user-select: none;">
     <el-submenu v-if="isHaveChildren(item.children, item)" :index="resolvePath(item.path)">
@@ -28,6 +29,8 @@ import {Component, Prop, Vue} from "vue-property-decorator"
 import {RouteConfig} from "vue-router";
 import ItemLink from "@/layout/components/Sidebar/ItemLink.vue";
 import Item from "@/layout/components/Sidebar/Item.vue";
+import { isExternal } from "@/utils/validate";
+import path from "path";
 
 @Component({
   name: 'sidebarItem',
@@ -56,7 +59,13 @@ export default class SidebarItem extends Vue {
   }
 
   resolvePath(routePath: string): string {
-    return this.basePath + routePath
+    if (isExternal(routePath)) {
+      return routePath;
+    }
+    if (isExternal(this.basePath)) {
+      return this.basePath;
+    }
+    return path.resolve(this.basePath, routePath);
   }
 
 }

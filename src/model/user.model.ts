@@ -1,6 +1,7 @@
 export interface UserInfoModel {
-  userName: string;
+  token: string;
   avatar: string;
+  roles: string[];
 }
 export interface loginFormDataModel {
   username:string;
