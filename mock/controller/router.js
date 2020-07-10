@@ -1,34 +1,28 @@
 const data = [
   {
+    id:1,
     path: '',
     component: 'Layout',
     meta: {
-      title: '首页Layout',
+      title: '首页',
       icon: 'edit'
     },
     children: [
       {
+        id:2,
         path: '/home',
         name: 'home',
         component: 'Home',
         meta: {
-          title: '首页1',
-          icon: 'edit'
-        }
-      },
-      {
-        path: '/about',
-        name: 'about',
-        component: 'About',
-        meta: {
-          title: '首页2',
+          title: '首页',
           icon: 'edit',
-          noCache:true
+          affix: true
         }
       }
     ]
   },
   {
+    id:3,
     path:'/permission',
     component:'Layout',
     meta:{
@@ -37,15 +31,16 @@ const data = [
     },
     children:[
       {
+        id:4,
         path:'roleManagement',
         name:'roleManagement',
         component:'permission/roleManagement',
         meta:{
-          title:'角色管理',
-          affix: true
+          title:'角色管理'
         }
       },
       {
+        id:5,
         path:'menuManagement',
         name:'menuManagement',
         component:'permission/menuManagement',
@@ -56,6 +51,7 @@ const data = [
     ]
   },
   {
+    id:6,
     path: '/layout',
     component: 'Layout',
     meta: {
@@ -64,6 +60,7 @@ const data = [
     },
     children: [
       {
+        id:7,
         path: '/home23',
         name: 'about2',
         component: 'Home',
@@ -73,6 +70,7 @@ const data = [
         }
       },
       {
+        id:8,
         path: '/about234',
         name: 'about',
         component: 'About',
@@ -82,6 +80,7 @@ const data = [
         }
       },
       {
+        id:9,
         path: 'a401',
         name: 'a401',
         component: 'views/error-page/401',
@@ -93,6 +92,7 @@ const data = [
     ]
   },
   {
+    id:10,
     path: '/error',
     component: 'Layout',
     meta: {
@@ -101,6 +101,7 @@ const data = [
     },
     children: [
       {
+        id:11,
         path: 'b401',
         name: '401',
         component: 'views/nested/index',
@@ -110,6 +111,7 @@ const data = [
         },
         children: [
           {
+            id:12,
             path: 'asdf',
             name: '401',
             component: 'views/About',
@@ -119,6 +121,7 @@ const data = [
             }
           },
           {
+            id:13,
             path: 'asdf2',
             name: '401',
             component: 'views/About',
@@ -130,23 +133,23 @@ const data = [
         ]
       },
       {
+        id:14,
         path: 'about',
         name: 'about',
         component: 'views/About',
         meta: {
           title: '首页11',
           icon: 'edit',
-          permissions:['test']
         }
       },
       {
+        id:15,
         path: '401',
         name: '401',
         component: 'views/error-page/401',
         meta: {
           title: '首12',
           icon: 'edit',
-          permissions:['admin']
         }
       }
     ]

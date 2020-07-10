@@ -58,11 +58,11 @@ export default class roleManagement extends Vue {
   };
 
   handleAdd(id: number) {
-    (this.$refs.roleEditDialog as any).dialogOpen(id);
+    (this.$refs.roleEditDialog as any).openDialog(id);
   };
 
   handleEdit(id: number) {
-    (this.$refs.roleEditDialog as any).dialogOpen(id);
+    (this.$refs.roleEditDialog as any).openDialog(id);
   };
 
   handleDelete() {

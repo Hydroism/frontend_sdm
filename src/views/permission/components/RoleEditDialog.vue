@@ -1,6 +1,6 @@
 <template>
   <hy-dialog :visible.sync="dialogVisible" width="800px" :title="title">
-    <el-form ref="form" :mdoel="formData" :rules="rules" label-width="80px" v-loading="dataLoading">
+    <el-form ref="form" :mdoel="formData" :rules="rules" label-width="100px" v-loading="dataLoading">
       <el-form-item label="角色名">
         <el-input v-model="formData.roleName" />
       </el-form-item>
@@ -40,7 +40,7 @@ export default class RoleEditDialog extends Vue {
 
   rules: any = {};
 
-  dialogOpen(id: number): void {
+  openDialog(id: number): void {
     if (id) {
       this.title = '编辑角色';
       this.id = id;
