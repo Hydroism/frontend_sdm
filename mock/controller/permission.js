@@ -14,17 +14,19 @@ const data = [
 ];
 const route = [
   {
-    path: '',
+    path: '/',
     component: 'Layout',
+    componentName: 'Layout',
     meta: {
       title: '首页',
       icon: 'edit'
     },
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'home',
         component: 'Home',
+        componentName: 'Home',
         meta: {
           title: '首页',
           icon: 'edit',
@@ -34,27 +36,30 @@ const route = [
     ]
   },
   {
-    path:'/permission',
-    component:'Layout',
-    meta:{
-      title:'权限管理',
-      icon:'edit'
+    path: '/permission',
+    component: 'Layout',
+    componentName: 'Layout',
+    meta: {
+      title: '权限管理',
+      icon: 'edit'
     },
-    children:[
+    children: [
       {
-        path:'roleManagement',
-        name:'roleManagement',
-        component:'permission/roleManagement',
-        meta:{
-          title:'角色管理'
+        path: 'roleManagement',
+        name: 'roleManagement',
+        component: 'permission/roleManagement',
+        componentName: 'permission/roleManagement',
+        meta: {
+          title: '角色管理'
         }
       },
       {
-        path:'menuManagement',
-        name:'menuManagement',
-        component:'permission/menuManagement',
-        meta:{
-          title:'菜单管理'
+        path: 'menuManagement',
+        name: 'menuManagement',
+        component: 'permission/menuManagement',
+        componentName: 'permission/menuManagement',
+        meta: {
+          title: '菜单管理'
         }
       }
     ]
@@ -62,24 +67,27 @@ const route = [
   {
     path: '/layout',
     component: 'Layout',
+    componentName: 'Layout',
     meta: {
       title: '首页3',
       icon: 'edit',
     },
     children: [
       {
-        path: '/home23',
+        path: 'home23',
         name: 'about2',
         component: 'Home',
+        componentName: 'Home',
         meta: {
           title: '首页4',
           icon: 'edit',
         }
       },
       {
-        path: '/about234',
+        path: 'about234',
         name: 'about',
         component: 'About',
+        componentName: 'About',
         meta: {
           title: '首页5',
           icon: 'edit',
@@ -89,6 +97,7 @@ const route = [
         path: 'a401',
         name: 'a401',
         component: 'views/error-page/401',
+        componentName: 'views/error-page/401',
         meta: {
           title: '首页6',
           icon: 'edit',
@@ -99,6 +108,7 @@ const route = [
   {
     path: '/error',
     component: 'Layout',
+    componentName: 'Layout',
     meta: {
       title: '首页7',
       icon: 'edit',
@@ -108,6 +118,7 @@ const route = [
         path: 'b401',
         name: '401',
         component: 'views/nested/index',
+        componentName: 'views/nested/index',
         meta: {
           title: '首页8',
           icon: 'edit',
@@ -117,6 +128,7 @@ const route = [
             path: 'asdf',
             name: '401',
             component: 'views/About',
+            componentName: 'views/About',
             meta: {
               title: '首页9',
               icon: 'edit'
@@ -126,6 +138,7 @@ const route = [
             path: 'asdf2',
             name: '401',
             component: 'views/About',
+            componentName: 'views/About',
             meta: {
               title: '首页10',
               icon: 'edit',
@@ -137,6 +150,7 @@ const route = [
         path: 'about',
         name: 'about',
         component: 'views/About',
+        componentName: 'views/About',
         meta: {
           title: '首页11',
           icon: 'edit',
@@ -146,6 +160,7 @@ const route = [
         path: '401',
         name: '401',
         component: 'views/error-page/401',
+        componentName: 'views/error-page/401',
         meta: {
           title: '首12',
           icon: 'edit',
@@ -164,6 +179,16 @@ export default [
           count: 2,
           results: data
         }
+      }
+    }
+  },
+  {
+    url: 'mock/permission/roleAll',
+    type: 'get',
+    response: config => {
+      return {
+        code: 200,
+        data: data
       }
     }
   },
@@ -191,6 +216,16 @@ export default [
       return {
         code: 200,
         data: route
+      }
+    }
+  },
+  {
+    url: 'mock/permission/routerOnRoles',
+    type: 'get',
+    response: config => {
+      return {
+        code: 200,
+        data: [1]
       }
     }
   }

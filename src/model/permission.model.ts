@@ -1,5 +1,11 @@
+export interface PostRoleModel{
+  roleName: string;
+  roleCode: string;
+  description: string;
+}
+
 export interface RoleModel{
-  id?:number;
+  id:number;
   roleName: string;
   roleCode: string;
   description: string;

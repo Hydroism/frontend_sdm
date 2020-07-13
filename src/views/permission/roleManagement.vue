@@ -66,6 +66,9 @@ export default class roleManagement extends Vue {
   };
 
   handleDelete() {
+    this.$hyConfirm('删除角色后不可撤回，确认？', () => {
+      this.$hySuccess('删除成功')
+    })
   };
 }
 </script>

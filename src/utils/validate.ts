@@ -17,9 +17,18 @@ export function isPassword(str:string):boolean {
 }
 
 /**
- * @description 校验有户名格式 大于3位，且小于20位
+ * @description 校验用户名格式 大于3位，且小于20位
  * @param str
  */
 export function isUsername(str:string):boolean {
   return str.length >= 3 && str.length < 20
+}
+
+/**
+ * @description 由数字和26个英文字母组成的字符串
+ * @param str
+ * @returns {boolean}
+ */
+export function isAlphabetNumber(str:string):boolean {
+  return /^[A-Za-z0-9]+$/.test(str)
 }

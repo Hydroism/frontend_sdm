@@ -24,7 +24,7 @@ export default class JsonEditor extends Vue {
   @Prop({required: true})
   value!: [any[], Object];
 
-  @Watch('value')
+  @Watch('value',{deep:true})
   changeValue(value: string, oldValue: string) {
     let val = JSON.stringify(value, null, 2);
     const editorValue = this.jsonEditor.getValue();

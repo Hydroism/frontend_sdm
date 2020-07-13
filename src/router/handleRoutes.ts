@@ -1,6 +1,7 @@
 import {RouteConfig} from "vue-router";
 import store from '@/store'
 import Layout from "@/layout/Layout.vue";
+import {RouterModel} from "@/model/router.model";
 
 function loadView(viewPath:string){
   return (resolve:any) => require([`@/views/${viewPath}`], resolve)
@@ -11,7 +12,7 @@ function loadView(viewPath:string){
  * @param constantRoutes
  * @returns {*}
  */
-export function filterRoutes(constantRoutes: RouteConfig[]) {
+export function filterRoutes(constantRoutes: RouterModel[]) {
   return constantRoutes.filter((route) => {
     if (route.component) {
       if (route.component === "Layout") {

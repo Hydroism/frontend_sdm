@@ -1,22 +1,8 @@
 <template>
   <div class="app-container">
-    <table-top-panel>
-      <template slot="left-panel">
-        <el-button type="primary" size="small">测试东西</el-button>
-        <el-button type="primary" size="small">测试东西</el-button>
-        <el-button type="primary" size="small">测试东西</el-button>
-      </template>
-      <template slot="right-panel">
-        <el-button type="success" size="small">测试东西</el-button>
-        <el-button type="success" size="small">测试东西</el-button>
-        <el-button type="success" size="small">测试东西</el-button>
-        <el-button type="success" size="small">测试东西</el-button>
-        <table-search-bar v-model="value" @handleSercha="queryData"/>
-      </template>
-    </table-top-panel>
 
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :loading="loading">
         <el-tree
           ref="demoTree"
           class="filter-tree"
@@ -24,9 +10,9 @@
           :expand-on-click-node="false"
           :highlight-current="true"
           node-key="id"
-          @node-click="nodeClick"
-          @node-collapse="nodeCollapse"
-          @node-expand="nodeExpand"
+          draggable
+          default-expand-all
+          @node-drag-end="handleDragEnd"
         >
           <span slot-scope="{ node, data }" class="custom-tree-node">
             <span class="tree-item">
@@ -66,22 +52,17 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator"
-import {TableTopPanel, TableSearchBar, TablePagination} from "@/components/HyTable";
 import JsonEditor from "@/components/JsonEditor/JsonEditor.vue";
 import MenuEditDialog from "./components/MenuEditDialog.vue";
 import routerService from "@/api/routerService";
-import {RouteConfig} from "vue-router";
 import {RouterModel} from "@/model/router.model";
 
 @Component({
-  components: {TableTopPanel, TableSearchBar, TablePagination, JsonEditor, MenuEditDialog}
+  components: {JsonEditor, MenuEditDialog}
 })
 export default class menuManagement extends Vue {
-  value: string = '';
-  routeList: RouteConfig[] = [];
-
-  queryData() {
-  };
+  loading: boolean = false;
+  routeList: RouterModel[] = [];
 
   created() {
     this.getData();
@@ -101,25 +82,31 @@ export default class menuManagement extends Vue {
     }
   };
 
-
-  nodeClick() {
+  handleDragEnd(draggingNode: any, dropNode: any, dropType: any, ev: any) {
+    this.loading = true;
+    routerService.postSortRouter(this.routeList).then(res => {
+      this.$hySuccess('调序成功~');
+      // this.getData();
+    }).finally(() => {
+      this.loading = false
+    })
   };
 
-  nodeCollapse() {
+  append(node: any, data: any): void {
+    (this.$refs.menuEditDialog as any).openDialog({parent: data});
   };
 
-  nodeExpand() {
+  edit(node: any, data: RouterModel): void {
+    (this.$refs.menuEditDialog as any).openDialog({data: data});
   };
 
-  append(node: any, data: any) {
-    console.log(node, data);
-  };
-
-  edit(node: any, data: RouterModel) {
-    (this.$refs.menuEditDialog as any).openDialog(data);
-  };
-
-  remove() {
+  remove(node: any, data: RouterModel): void {
+    this.$hyConfirm(`删除${data.meta.title}后无法撤回，确认？`, () => {
+      routerService.delRouter(data.id as number).then(res => {
+        this.$hySuccess(`删除${data.meta.title}成功~`);
+        this.getData();
+      })
+    })
   };
 }
 </script>

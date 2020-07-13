@@ -1,7 +1,7 @@
 const data = [
   {
-    id:1,
-    path: '',
+    id: 1,
+    path: '/',
     component: 'Layout',
     meta: {
       title: '首页',
@@ -9,8 +9,8 @@ const data = [
     },
     children: [
       {
-        id:2,
-        path: '/home',
+        id: 2,
+        path: 'home',
         name: 'home',
         component: 'Home',
         meta: {
@@ -22,36 +22,36 @@ const data = [
     ]
   },
   {
-    id:3,
-    path:'/permission',
-    component:'Layout',
-    meta:{
-      title:'权限管理',
-      icon:'edit'
+    id: 3,
+    path: '/permission',
+    component: 'Layout',
+    meta: {
+      title: '权限管理',
+      icon: 'edit'
     },
-    children:[
+    children: [
       {
-        id:4,
-        path:'roleManagement',
-        name:'roleManagement',
-        component:'permission/roleManagement',
-        meta:{
-          title:'角色管理'
+        id: 4,
+        path: 'roleManagement',
+        name: 'roleManagement',
+        component: 'permission/roleManagement',
+        meta: {
+          title: '角色管理'
         }
       },
       {
-        id:5,
-        path:'menuManagement',
-        name:'menuManagement',
-        component:'permission/menuManagement',
-        meta:{
-          title:'菜单管理'
+        id: 5,
+        path: 'menuManagement',
+        name: 'menuManagement',
+        component: 'permission/menuManagement',
+        meta: {
+          title: '菜单管理'
         }
       }
     ]
   },
   {
-    id:6,
+    id: 6,
     path: '/layout',
     component: 'Layout',
     meta: {
@@ -60,8 +60,8 @@ const data = [
     },
     children: [
       {
-        id:7,
-        path: '/home23',
+        id: 7,
+        path: 'home23',
         name: 'about2',
         component: 'Home',
         meta: {
@@ -70,8 +70,8 @@ const data = [
         }
       },
       {
-        id:8,
-        path: '/about234',
+        id: 8,
+        path: 'about234',
         name: 'about',
         component: 'About',
         meta: {
@@ -80,7 +80,7 @@ const data = [
         }
       },
       {
-        id:9,
+        id: 9,
         path: 'a401',
         name: 'a401',
         component: 'views/error-page/401',
@@ -92,7 +92,7 @@ const data = [
     ]
   },
   {
-    id:10,
+    id: 10,
     path: '/error',
     component: 'Layout',
     meta: {
@@ -101,7 +101,7 @@ const data = [
     },
     children: [
       {
-        id:11,
+        id: 11,
         path: 'b401',
         name: '401',
         component: 'views/nested/index',
@@ -111,7 +111,7 @@ const data = [
         },
         children: [
           {
-            id:12,
+            id: 12,
             path: 'asdf',
             name: '401',
             component: 'views/About',
@@ -121,7 +121,7 @@ const data = [
             }
           },
           {
-            id:13,
+            id: 13,
             path: 'asdf2',
             name: '401',
             component: 'views/About',
@@ -133,7 +133,7 @@ const data = [
         ]
       },
       {
-        id:14,
+        id: 14,
         path: 'about',
         name: 'about',
         component: 'views/About',
@@ -143,7 +143,7 @@ const data = [
         }
       },
       {
-        id:15,
+        id: 15,
         path: '401',
         name: '401',
         component: 'views/error-page/401',
@@ -163,6 +163,46 @@ export default [
       return {
         code: 200,
         data: data
+      }
+    }
+  },
+  {
+    url: 'mock/router/addRouter',
+    type: 'post',
+    response: config => {
+      return {
+        code: 200,
+        data: '成功'
+      }
+    }
+  },
+  {
+    url: 'mock/router/editRouter',
+    type: 'put',
+    response: config => {
+      return {
+        code: 200,
+        data: '成功'
+      }
+    }
+  },
+  {
+    url: 'mock/router/delRouter',
+    type: 'delete',
+    response: config => {
+      return {
+        code: 200,
+        data: '成功'
+      }
+    }
+  },
+  {
+    url: 'mock/router/sortRouter',
+    type: 'post',
+    response: config => {
+      return {
+        code: 200,
+        data: '成功'
       }
     }
   }

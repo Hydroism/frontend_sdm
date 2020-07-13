@@ -1,6 +1,9 @@
 <template>
   <el-dialog v-bind="attrs" v-on="$listeners">
-    <slot />
+    <slot/>
+    <template slot="footer">
+      <slot name="footer"/>
+    </template>
   </el-dialog>
 </template>
 
@@ -8,6 +11,7 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 
 const defaultAttrs = {
+  'close-on-click-modal': false
 };
 @Component
 export default class HyDialog extends Vue {

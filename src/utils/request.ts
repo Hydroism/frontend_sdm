@@ -1,8 +1,8 @@
 import axios from "axios"
 import config from "@/utils/config";
 import store from '@/store'
-import {Loading, Message} from "element-ui";
-import {ElMessageComponent} from "element-ui/types/message";
+import {Loading} from "element-ui";
+import {errorToast} from "@/plugins/toast";
 
 const baseUrl = config.baseUrl;
 
@@ -11,16 +11,10 @@ const service = axios.create({
   timeout: 5000
 });
 
-let elMessage: ElMessageComponent;
+let elMessage: any;
 const errorMsg = (message: string) => {
-  return Message({
-    message: message,
-    type: "error",
-    duration: 3000,
-    showClose: true
-  });
+  return errorToast(message)
 };
-
 
 service.interceptors.request.use(config => {
   if (store.getters['user/token']) {

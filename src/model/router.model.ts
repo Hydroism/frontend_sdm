@@ -3,15 +3,20 @@ import {Component} from "vue-router/types/router";
 export interface RouterModel {
   path:string;
   component:string|Component;
-  name?:string;
+  meta:metaModel;
+  name:string;
+  id?:number;
   redirect?:string;
-  meta?:metaModel;
   children?:RouterModel[];
 }
 
 export interface metaModel {
-  title?:string;
+  title:string;
   icon?:string;
   affix?:boolean;
   noCache?:boolean
+}
+
+export interface addRouterMode extends RouterModel{
+  parentId:number
 }
