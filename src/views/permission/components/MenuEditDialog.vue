@@ -7,7 +7,7 @@
       <el-form-item label="路径名称" prop="name">
         <el-input v-model="formData.name"/>
       </el-form-item>
-      <el-form-item label="组件" prop="component">
+      <el-form-item label="视图" prop="component">
         <el-select v-model="formData.component" filterable style="width:100%">
           <el-option v-for="item in componentList" :key="item" :label="item" :value="item" />
         </el-select>
@@ -37,7 +37,7 @@
 
     <div slot="footer" class="dialog-footer">
       <el-button @click="closeDialog">取消</el-button>
-      <el-button type="primary" @click="handleConfirm" :loding="loading">确认</el-button>
+      <el-button type="primary" @click="handleConfirm" :loding="submitLoading">确认</el-button>
     </div>
 
   </hy-dialog>
@@ -70,7 +70,7 @@ class Router {
   components: {HyDialog}
 })
 export default class MenuEditDialog extends Vue {
-  loading: boolean = false;
+  submitLoading: boolean = false;
 
   dialogVisible: boolean = false;
   title: string = '';
@@ -86,7 +86,7 @@ export default class MenuEditDialog extends Vue {
       {required: true, message: '请填写路劲英文名', trigger: 'blur'},
       {validator: elValidateAlphabetNumber, trigger: 'blur'}
     ],
-    component: [{required: true, message: '请填写组件', trigger: 'blur'}]
+    component: [{required: true, message: '请填写视图', trigger: 'blur'}]
   };
   rulesMeta: any = {
     title: [{required: true, message: '请填写菜单标题', trigger: 'blur'}]
@@ -166,26 +166,26 @@ export default class MenuEditDialog extends Vue {
       const params: addRouterMode = {
         parentId: this.parentId, ...this.formData
       };
-      this.loading = true;
+      this.submitLoading = true;
       routerService.addRouter(params).then(res => {
         this.$hySuccess('添加成功');
         this.closeDialog();
         this.$emit('refresh')
       }).finally(() => {
-        this.loading = false;
+        this.submitLoading = false;
       })
     } else {
       //修改路由
       const params: RouterModel = {
         ...this.formData
       };
-      this.loading = true;
+      this.submitLoading = true;
       routerService.putRouter(params).then(res => {
         this.$hySuccess('修改成功');
         this.closeDialog();
         this.$emit('refresh')
       }).finally(() => {
-        this.loading = false;
+        this.submitLoading = false;
       })
     }
   }

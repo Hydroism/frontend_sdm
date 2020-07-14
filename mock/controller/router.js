@@ -15,7 +15,7 @@ const data = [
         component: 'Home',
         meta: {
           title: '首页',
-          icon: 'edit',
+          icon: 'dashboard',
           affix: true
         }
       }
@@ -46,6 +46,15 @@ const data = [
         component: 'permission/menuManagement',
         meta: {
           title: '菜单管理'
+        }
+      },
+      {
+        id: 16,
+        path: 'viewsManagement',
+        name: 'viewsManagement',
+        component: 'permission/viewsManagement',
+        meta: {
+          title: '视图管理'
         }
       }
     ]

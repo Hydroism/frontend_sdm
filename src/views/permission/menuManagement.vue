@@ -2,7 +2,8 @@
   <div class="app-container">
 
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :loading="loading">
+      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-loading="loading">
+        <el-divider content-position="left">菜单树状图</el-divider>
         <el-tree
           ref="demoTree"
           class="filter-tree"
@@ -39,10 +40,13 @@
             </span>
           </span>
         </el-tree>
+        <br />
       </el-col>
 
       <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+        <el-divider content-position="left">菜单源代码</el-divider>
         <json-editor :value="routeList" @changed="changeRoute"/>
+        <br />
       </el-col>
     </el-row>
 

@@ -9,7 +9,7 @@
       </template>
     </table-top-panel>
 
-    <hy-table v-loading="dataLoading" :data="tableData">
+    <hy-table v-loading="loading" :data="tableData">
       <el-table-column prop="roleName" label="角色名" width="200" align="center"/>
       <el-table-column prop="roleCode" label="角色码" width="200" align="center"/>
       <el-table-column prop="description" label="角色描述" :align="'left'"/>
@@ -39,7 +39,7 @@ import RoleEditDialog from "./components/RoleEditDialog.vue";
 })
 export default class roleManagement extends Vue {
   searchInput: string = '';
-  dataLoading: boolean = true;
+  loading: boolean = true;
   tableData: any = [];
   pageQuery: PageQuery = new PageQuery();
 
@@ -48,12 +48,12 @@ export default class roleManagement extends Vue {
   };
 
   getData() {
-    this.dataLoading = true;
+    this.loading = true;
     permissionService.getListRole(this.pageQuery).then(res => {
       this.pageQuery.covertResponses(res.data);
       this.tableData = res.data.results;
     }).finally(() => {
-      this.dataLoading = false;
+      this.loading = false;
     })
   };
 

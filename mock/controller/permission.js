@@ -29,7 +29,7 @@ const route = [
         componentName: 'Home',
         meta: {
           title: '首页',
-          icon: 'edit',
+          icon: 'dashboard',
           affix: true
         }
       }
@@ -60,6 +60,15 @@ const route = [
         componentName: 'permission/menuManagement',
         meta: {
           title: '菜单管理'
+        }
+      },
+      {
+        path: 'viewsManagement',
+        name: 'viewsManagement',
+        component: 'permission/viewsManagement',
+        componentName: 'permission/viewsManagement',
+        meta: {
+          title: '视图管理'
         }
       }
     ]
@@ -205,7 +214,7 @@ export default [
       }
       return {
         code: 200,
-        data: role
+        data: {...role, }
       }
     }
   },
