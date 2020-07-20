@@ -61,20 +61,20 @@ const data = [
   },
   {
     id: 6,
-    path: '/layout',
+    path: '/table',
     component: 'Layout',
     meta: {
-      title: '首页3',
+      title: '表格',
       icon: 'edit',
     },
     children: [
       {
         id: 7,
-        path: 'home23',
-        name: 'about2',
-        component: 'Home',
+        path: 'tableTemplate',
+        name: 'tableTemplate',
+        component: 'table/tableTemplate',
         meta: {
-          title: '首页4',
+          title: '测试表格',
           icon: 'edit',
         }
       },

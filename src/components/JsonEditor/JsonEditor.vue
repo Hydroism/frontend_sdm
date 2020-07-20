@@ -39,7 +39,8 @@ export default class JsonEditor extends Vue {
       mode: 'application/json',
       gutters: ['CodeMirror-lint-markers'],
       theme: 'rubyblue',
-      lint: true
+      lint: true,
+      readOnly:true
     });
 
     this.jsonEditor.setValue(JSON.stringify(this.value, null, 2));

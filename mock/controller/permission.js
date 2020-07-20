@@ -16,8 +16,8 @@ const route = [
   {
     path: '/',
     component: 'Layout',
-    componentName: 'Layout',
     meta: {
+      componentId:1,
       title: '首页',
       icon: 'edit'
     },
@@ -26,8 +26,8 @@ const route = [
         path: 'home',
         name: 'home',
         component: 'Home',
-        componentName: 'Home',
         meta: {
+          componentId:2,
           title: '首页',
           icon: 'dashboard',
           affix: true
@@ -38,8 +38,8 @@ const route = [
   {
     path: '/permission',
     component: 'Layout',
-    componentName: 'Layout',
     meta: {
+      componentId:1,
       title: '权限管理',
       icon: 'edit'
     },
@@ -48,8 +48,8 @@ const route = [
         path: 'roleManagement',
         name: 'roleManagement',
         component: 'permission/roleManagement',
-        componentName: 'permission/roleManagement',
         meta: {
+          componentId:3,
           title: '角色管理'
         }
       },
@@ -57,8 +57,8 @@ const route = [
         path: 'menuManagement',
         name: 'menuManagement',
         component: 'permission/menuManagement',
-        componentName: 'permission/menuManagement',
         meta: {
+          componentId:4,
           title: '菜单管理'
         }
       },
@@ -66,29 +66,29 @@ const route = [
         path: 'viewsManagement',
         name: 'viewsManagement',
         component: 'permission/viewsManagement',
-        componentName: 'permission/viewsManagement',
         meta: {
+          componentId:5,
           title: '视图管理'
         }
       }
     ]
   },
   {
-    path: '/layout',
+    path: '/table',
     component: 'Layout',
-    componentName: 'Layout',
     meta: {
-      title: '首页3',
+      componentId:1,
+      title: '表格',
       icon: 'edit',
     },
     children: [
       {
-        path: 'home23',
-        name: 'about2',
-        component: 'Home',
-        componentName: 'Home',
+        path: 'tableTemplate',
+        name: 'tableTemplate',
+        component: 'table/tableTemplate',
         meta: {
-          title: '首页4',
+          componentId:6,
+          title: '测试表格',
           icon: 'edit',
         }
       },
@@ -96,7 +96,6 @@ const route = [
         path: 'about234',
         name: 'about',
         component: 'About',
-        componentName: 'About',
         meta: {
           title: '首页5',
           icon: 'edit',
@@ -106,7 +105,6 @@ const route = [
         path: 'a401',
         name: 'a401',
         component: 'views/error-page/401',
-        componentName: 'views/error-page/401',
         meta: {
           title: '首页6',
           icon: 'edit',
@@ -117,7 +115,6 @@ const route = [
   {
     path: '/error',
     component: 'Layout',
-    componentName: 'Layout',
     meta: {
       title: '首页7',
       icon: 'edit',
@@ -127,7 +124,6 @@ const route = [
         path: 'b401',
         name: '401',
         component: 'views/nested/index',
-        componentName: 'views/nested/index',
         meta: {
           title: '首页8',
           icon: 'edit',
@@ -137,7 +133,6 @@ const route = [
             path: 'asdf',
             name: '401',
             component: 'views/About',
-            componentName: 'views/About',
             meta: {
               title: '首页9',
               icon: 'edit'
@@ -147,7 +142,6 @@ const route = [
             path: 'asdf2',
             name: '401',
             component: 'views/About',
-            componentName: 'views/About',
             meta: {
               title: '首页10',
               icon: 'edit',
@@ -159,7 +153,6 @@ const route = [
         path: 'about',
         name: 'about',
         component: 'views/About',
-        componentName: 'views/About',
         meta: {
           title: '首页11',
           icon: 'edit',
@@ -169,7 +162,6 @@ const route = [
         path: '401',
         name: '401',
         component: 'views/error-page/401',
-        componentName: 'views/error-page/401',
         meta: {
           title: '首12',
           icon: 'edit',
@@ -177,6 +169,7 @@ const route = [
       }
     ]
   }];
+
 export default [
   {
     url: 'mock/permission/roleList',

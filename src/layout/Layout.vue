@@ -41,10 +41,6 @@
     @appModule.Getter('isCollapse') isCollapse!: boolean;
     @appModule.Getter('device') device!: DeviceEnum;
 
-    handleClickOutside() {
-      this.$store.dispatch('app/closeSidebar')
-    };
-
     get classObj() {
       return {
         hideSidebar: this.isCollapse,
@@ -55,6 +51,10 @@
 
     get isMobile(): boolean {
       return this.device === DeviceEnum.mobile
+    };
+
+    handleClickOutside() {
+      this.$store.dispatch('app/closeSidebar')
     };
   }
 </script>
