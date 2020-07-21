@@ -14,3 +14,16 @@ export interface RoleModel {
 export interface RoleDetailModel extends PostRoleModel {
   routers: number[]
 }
+
+export interface ButtonPermission {
+  id:number,
+  buttons:PermissionButtonItem[]
+}
+
+export interface PermissionButtonItem {
+  name: string,
+  remarks: string,
+  isEnable: boolean,
+  permissionRoles: number[],
+  permissionRoles_display: string
+}

@@ -17,7 +17,6 @@ const route = [
     path: '/',
     component: 'Layout',
     meta: {
-      componentId:1,
       title: '首页',
       icon: 'edit'
     },
@@ -27,7 +26,6 @@ const route = [
         name: 'home',
         component: 'Home',
         meta: {
-          componentId:2,
           title: '首页',
           icon: 'dashboard',
           affix: true
@@ -39,7 +37,6 @@ const route = [
     path: '/permission',
     component: 'Layout',
     meta: {
-      componentId:1,
       title: '权限管理',
       icon: 'edit'
     },
@@ -49,7 +46,6 @@ const route = [
         name: 'roleManagement',
         component: 'permission/roleManagement',
         meta: {
-          componentId:3,
           title: '角色管理'
         }
       },
@@ -58,17 +54,7 @@ const route = [
         name: 'menuManagement',
         component: 'permission/menuManagement',
         meta: {
-          componentId:4,
           title: '菜单管理'
-        }
-      },
-      {
-        path: 'viewsManagement',
-        name: 'viewsManagement',
-        component: 'permission/viewsManagement',
-        meta: {
-          componentId:5,
-          title: '视图管理'
         }
       }
     ]
@@ -77,7 +63,7 @@ const route = [
     path: '/table',
     component: 'Layout',
     meta: {
-      componentId:1,
+      componentId: 1,
       title: '表格',
       icon: 'edit',
     },
@@ -87,7 +73,6 @@ const route = [
         name: 'tableTemplate',
         component: 'table/tableTemplate',
         meta: {
-          componentId:6,
           title: '测试表格',
           icon: 'edit',
         }
@@ -170,6 +155,44 @@ const route = [
     ]
   }];
 
+const btnPermission = [{
+  id: 4,
+  buttons: [
+    {
+      name: 'roleManagement_add',
+      remarks: '角色增加',
+      isEnable: true,
+      permissionRoles: [1, 2],
+      permissionRoles_display:"admin,developer"
+    },
+    {
+      name: 'roleManagement_del',
+      remarks: '角色删除',
+      isEnable: true,
+      permissionRoles: [1],
+      permissionRoles_display:"admin"
+    }
+  ]
+},{
+  id: 7,
+  buttons: [
+    {
+      name: 'tableTemplate_add',
+      remarks: '表格模板增加',
+      isEnable: true,
+      permissionRoles: [1, 2],
+      permissionRoles_display:"admin,developer"
+    },
+    {
+      name: 'tableTemplate_del',
+      remarks: '表格模板删除',
+      isEnable: true,
+      permissionRoles: [1],
+      permissionRoles_display:"admin"
+    }
+  ]
+},];
+
 export default [
   {
     url: 'mock/permission/roleList',
@@ -207,7 +230,7 @@ export default [
       }
       return {
         code: 200,
-        data: {...role, }
+        data: { ...role, }
       }
     }
   },
@@ -221,6 +244,10 @@ export default [
       }
     }
   },
+
+  /**
+   * 获取路由菜单对应的有权限的角色id
+   */
   {
     url: 'mock/permission/routerOnRoles',
     type: 'get',
@@ -228,6 +255,24 @@ export default [
       return {
         code: 200,
         data: [1]
+      }
+    }
+  },
+
+  /**
+   * 菜单id对应的按钮权限
+   */
+  {
+    url: 'mock/permission/routerOnButton',
+    type: 'get',
+    response: config => {
+      const { id } = config.query;
+      let data = {};
+      const item = btnPermission.find(e => e.id === +id);
+      data = item ? item : { id: id, buttons: [] };
+      return {
+        code: 200,
+        data: data
       }
     }
   }

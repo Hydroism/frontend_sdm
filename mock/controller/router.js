@@ -47,15 +47,6 @@ const data = [
         meta: {
           title: '菜单管理'
         }
-      },
-      {
-        id: 16,
-        path: 'viewsManagement',
-        name: 'viewsManagement',
-        component: 'permission/viewsManagement',
-        meta: {
-          title: '视图管理'
-        }
       }
     ]
   },

@@ -12,7 +12,7 @@
     <hy-table v-loading="loading" :data="tableData">
       <el-table-column prop="roleName" label="角色名" width="200" align="center"/>
       <el-table-column prop="roleCode" label="角色码" width="200" align="center"/>
-      <el-table-column prop="description" label="角色描述" :align="'left'"/>
+      <el-table-column prop="description" label="角色描述" align="left"/>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button type="primary" @click="handleEdit(scope.row.id)">编辑</el-button>

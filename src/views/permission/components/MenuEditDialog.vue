@@ -9,7 +9,7 @@
       </el-form-item>
       <el-form-item label="视图" prop="component">
         <el-select v-model="formData.component" filterable style="width:100%">
-          <el-option v-for="item in componentList" :key="item" :label="item" :value="item" />
+          <el-option v-for="item in componentList" :key="item" :label="item" :value="item"/>
         </el-select>
       </el-form-item>
       <el-form ref="formMeta" :model="formData.meta" :rules="rulesMeta" label-width="100px">
@@ -26,7 +26,7 @@
           <el-switch v-model="formData.meta.noCache"/>
         </el-form-item>
       </el-form>
-      <el-form-item label="角色" prop="role">
+      <el-form-item label="权限角色" prop="role">
         <el-checkbox :indeterminate="isIndeterminate" v-model="roleCheckAll" @change="handleCheckAllChange">全选</el-checkbox>
         <div style="margin: 15px 0;"></div>
         <el-checkbox-group v-model="checkedRoles" @change="handleCheckedRoleChange">
@@ -51,10 +51,10 @@ import routerService from "@/api/routerService";
 import permissionService from "@/api/permissionService";
 import {elValidateAlphabetNumber} from "@/utils/validateEl";
 import {RoleModel} from "@/model/permission.model";
-import componentList from "@/constant/componentList"
+import COMPONENT_LIST from "@/constant/componentList"
 
 class Router {
-  id = undefined;
+  id = 0;
   path = '';
   name = '';
   component = '';
@@ -70,20 +70,22 @@ class Router {
   components: {HyDialog}
 })
 export default class MenuEditDialog extends Vue {
-  submitLoading: boolean = false;
-
   dialogVisible: boolean = false;
   title: string = '';
 
+  /**
+   * 表单
+   */
+  submitLoading: boolean = false;
+
   parentId!: number | undefined;
+  componentList: string[] = COMPONENT_LIST;
+
   formData: RouterModel = new Router();
-
-  componentList:string[] = componentList;
-
   rules: any = {
     path: [{required: true, message: '请填写路径', trigger: 'blur'}],
     name: [
-      {required: true, message: '请填写路劲英文名', trigger: 'blur'},
+      {required: true, message: '请填写路径英文名', trigger: 'blur'},
       {validator: elValidateAlphabetNumber, trigger: 'blur'}
     ],
     component: [{required: true, message: '请填写视图', trigger: 'blur'}]
@@ -96,7 +98,6 @@ export default class MenuEditDialog extends Vue {
    * 角色相关
    */
   roleList: RoleModel[] = [];
-
   roleCheckAll: boolean = false;
   checkedRoles: number[] = [];
   isIndeterminate: boolean = false;
@@ -118,18 +119,16 @@ export default class MenuEditDialog extends Vue {
     })
   };
 
-  closeDialog() {
+  openDialog({parentId, data}: { parentId: number, data: RouterModel }): void {
+    //初始化所有数据
     this.parentId = undefined;
     this.formData = new Router();
     this.roleCheckAll = false;
     this.checkedRoles = [];
     this.isIndeterminate = false;
-    this.dialogVisible = false;
-  };
 
-  openDialog({parent, data}: { parent: RouterModel, data: RouterModel }): void {
-    if (parent) {
-      this.parentId = parent.id;
+    if (parentId) {
+      this.parentId = parentId;
       this.title = '添加菜单'
     } else {
       this.formData = data;
@@ -137,6 +136,10 @@ export default class MenuEditDialog extends Vue {
       this.getPermissionRole();
     }
     this.dialogVisible = true;
+  };
+
+  closeDialog() {
+    this.dialogVisible = false;
   };
 
   handleCheckAllChange(value: boolean) {
@@ -161,8 +164,8 @@ export default class MenuEditDialog extends Vue {
   };
 
   saveForm() {
-    //添加路由
     if (this.parentId) {
+      //添加路由
       const params: addRouterMode = {
         parentId: this.parentId, ...this.formData
       };

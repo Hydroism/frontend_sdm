@@ -1,5 +1,5 @@
 const modulesFiles: any = require.context('@/views', true, /\.vue$/)
-let componentList: any[] = [];
+let COMPONENT_LIST: any[] = [];
 
 /**
  * 这是views视图的所有页面
@@ -8,8 +8,8 @@ let componentList: any[] = [];
 modulesFiles.keys().forEach((key: string) => {
   if (key.indexOf('components') === -1) {
     let componentPath = key.replace(/^\.\/(.*)\.\w+$/, '$1');
-    componentList.push(componentPath);
+    COMPONENT_LIST.push(componentPath);
   }
 });
 
-export default componentList;
+export default COMPONENT_LIST;

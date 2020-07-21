@@ -1,8 +1,9 @@
 <template>
   <div class="app-container">
+    <el-alert title="请在开发人员的指导下谨慎修改~如随意修改可能造成页面无法显示或显示错误等问题~" type="warning" show-icon :closable="false" />
 
     <el-row :gutter="20">
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-loading="loading">
+      <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8" v-loading="loading">
         <el-divider content-position="left">菜单树状图</el-divider>
         <el-tree
           ref="demoTree"
@@ -14,6 +15,7 @@
           draggable
           default-expand-all
           @node-drag-end="handleDragEnd"
+          @node-click="checkoutMenu"
         >
           <span slot-scope="{ node, data }" class="custom-tree-node">
             <span class="tree-item">
@@ -43,9 +45,9 @@
         <br />
       </el-col>
 
-      <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-        <el-divider content-position="left">菜单源代码</el-divider>
-        <json-editor :value="routeList" @changed="changeRoute"/>
+      <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16">
+        <el-divider content-position="left">页面功能权限控制列表</el-divider>
+        <button-permission :menuId="currentMenuId" />
         <br />
       </el-col>
     </el-row>
@@ -56,17 +58,20 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator"
-import JsonEditor from "@/components/JsonEditor/JsonEditor.vue";
 import MenuEditDialog from "./components/MenuEditDialog.vue";
+import ButtonPermission from "./components/ButtonPermission.vue";
 import routerService from "@/api/routerService";
 import {RouterModel} from "@/model/router.model";
+import {cloneDeep} from "lodash"
 
 @Component({
-  components: {JsonEditor, MenuEditDialog}
+  components: {MenuEditDialog, ButtonPermission}
 })
 export default class menuManagement extends Vue {
   loading: boolean = false;
   routeList: RouterModel[] = [];
+
+  currentMenuId:number = 0;
 
   created() {
     this.getData();
@@ -76,14 +81,6 @@ export default class menuManagement extends Vue {
     routerService.getRouterList().then(res => {
       this.routeList = res.data;
     })
-  };
-
-  changeRoute(e: string): void {
-    try {
-      this.routeList = JSON.parse(e)
-    } catch (e) {
-
-    }
   };
 
   handleDragEnd(draggingNode: any, dropNode: any, dropType: any, ev: any) {
@@ -96,12 +93,16 @@ export default class menuManagement extends Vue {
     })
   };
 
+  checkoutMenu(data:RouterModel){
+    this.currentMenuId = data.id;
+  };
+
   append(node: any, data: any): void {
-    (this.$refs.menuEditDialog as any).openDialog({parent: data});
+    (this.$refs.menuEditDialog as any).openDialog({parentId: data.id});
   };
 
   edit(node: any, data: RouterModel): void {
-    (this.$refs.menuEditDialog as any).openDialog({data: data});
+    (this.$refs.menuEditDialog as any).openDialog({data: cloneDeep(data)});
   };
 
   remove(node: any, data: RouterModel): void {

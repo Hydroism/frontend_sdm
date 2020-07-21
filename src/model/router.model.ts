@@ -1,11 +1,11 @@
 import {Component} from "vue-router/types/router";
 
 export interface RouterModel {
+  id:number;
   path:string;
   component:string|Component;
   meta:metaModel;
   name:string;
-  id?:number;
   redirect?:string;
   children?:RouterModel[];
 }
