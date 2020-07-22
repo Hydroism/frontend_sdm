@@ -34,13 +34,13 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from "vue-property-decorator"
-import {HyTable, TableTopPanel, TableSearchBar, TablePagination} from "@/components/HyTable";
+import {HyTable, TableTopPanel} from "@/components/HyTable";
 import permissionService from "@/api/permissionService";
 import ButtonEditDialog from "./ButtonEditDialog.vue";
 import {PermissionButtonItem} from "@/model/permission.model";
 
 @Component({
-  components: {TableTopPanel, TableSearchBar, TablePagination, HyTable, ButtonEditDialog}
+  components: {TableTopPanel, HyTable, ButtonEditDialog}
 })
 export default class ButtonPermission extends Vue {
   loading: boolean = false;

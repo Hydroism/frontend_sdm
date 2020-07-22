@@ -3,13 +3,15 @@ const data = [
     id: 1,
     roleName: '管理员',
     roleCode: 'admin',
-    description: '这是管理员，管理所有东西的'
+    description: '这是管理员，管理所有东西的',
+    routers:[1,2,3,4,9,12]
   },
   {
     id: 2,
     roleName: '普通用户',
     roleCode: 'user',
-    description: '这是普通用户，没什么用的，给他点东西就好了'
+    description: '这是普通用户，没什么用的，给他点东西就好了',
+    routers:[1,7,11,12]
   }
 ];
 const route = [
@@ -155,13 +157,15 @@ const route = [
     ]
   }];
 
-const btnPermission = [{
+const btnPermission = [
+  {
   id: 4,
   buttons: [
     {
       name: 'roleManagement_add',
       remarks: '角色增加',
       isEnable: true,
+      permissionCode:'4,0',
       permissionRoles: [1, 2],
       permissionRoles_display:"admin,developer"
     },
@@ -169,6 +173,7 @@ const btnPermission = [{
       name: 'roleManagement_del',
       remarks: '角色删除',
       isEnable: true,
+      permissionCode:'4,1',
       permissionRoles: [1],
       permissionRoles_display:"admin"
     }
@@ -180,6 +185,7 @@ const btnPermission = [{
       name: 'tableTemplate_add',
       remarks: '表格模板增加',
       isEnable: true,
+      permissionCode:'7,0',
       permissionRoles: [1, 2],
       permissionRoles_display:"admin,developer"
     },
@@ -187,6 +193,7 @@ const btnPermission = [{
       name: 'tableTemplate_del',
       remarks: '表格模板删除',
       isEnable: true,
+      permissionCode:'7,1',
       permissionRoles: [1],
       permissionRoles_display:"admin"
     }

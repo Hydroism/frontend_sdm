@@ -24,6 +24,7 @@ export interface PermissionButtonItem {
   name: string,
   remarks: string,
   isEnable: boolean,
+  permissionCode:string,
   permissionRoles: number[],
   permissionRoles_display: string
 }

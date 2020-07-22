@@ -6,8 +6,6 @@
       <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8" v-loading="loading">
         <el-divider content-position="left">菜单树状图</el-divider>
         <el-tree
-          ref="demoTree"
-          class="filter-tree"
           :data="routeList"
           :expand-on-click-node="false"
           :highlight-current="true"
