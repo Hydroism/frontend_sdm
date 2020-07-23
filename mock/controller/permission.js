@@ -44,6 +44,7 @@ const route = [
     },
     children: [
       {
+        id:4,
         path: 'roleManagement',
         name: 'roleManagement',
         component: 'permission/roleManagement',
@@ -71,6 +72,7 @@ const route = [
     },
     children: [
       {
+        id:7,
         path: 'tableTemplate',
         name: 'tableTemplate',
         component: 'table/tableTemplate',

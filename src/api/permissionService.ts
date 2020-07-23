@@ -33,11 +33,18 @@ const permissionService = {
   },
 
   /**
-   * 菜单id对应的按钮权限
+   * 菜单id对应的按钮权限(菜单管理)
    */
   getRouterOnButton(id: number): Promise<ResponseModel<ButtonPermission>> {
     return get(`mock/permission/routerOnButton`, {id: id})
-  }
+  },
+
+  /**
+   * 菜单id对应的按钮权限(应用)
+   */
+  getMenuOnPermissionButtons(id:number): Promise<ResponseModel<ButtonPermission>> {
+    return get(`mock/permission/routerOnButton`, {id: id})
+  },
 };
 
 export default permissionService

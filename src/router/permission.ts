@@ -18,10 +18,10 @@ router.beforeEach(async (to, from, next) => {
       // determine whether the user has obtained his permission roles through getInfo
       const hasRoles = store.getters['user/roles'] && store.getters['user/roles'].length > 0;
 
-      console.log("这里获取权限可以吗", to);
-
-      console.log(hasRoles);
       if (hasRoles) {
+        if (to.meta.routeId) {
+          await store.dispatch('permission/setPermissionButtons', to.meta.routeId);
+        }
         next()
       } else {
         try {

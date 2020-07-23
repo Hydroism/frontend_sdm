@@ -2,7 +2,7 @@
   <div class="app-container">
     <table-top-panel>
       <template slot="left-panel">
-        <el-button icon="el-icon-plus" type="primary" @click="handleAdd">添加视图</el-button>
+        <el-button icon="el-icon-plus" type="primary" @click="handleAdd" v-permission="'tableTemplate_add'">添加视图</el-button>
         <el-button icon="el-icon-plus" type="primary" @click="handleAdd">按钮1</el-button>
         <el-button icon="el-icon-plus" type="primary" @click="handleAdd">按钮2</el-button>
       </template>

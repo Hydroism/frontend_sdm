@@ -13,8 +13,10 @@ Vue.config.productionTip = false
 //   mockXHR();
 // }
 
-new Vue({
+let vue = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
+
+export default vue

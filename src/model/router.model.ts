@@ -12,9 +12,10 @@ export interface RouterModel {
 
 export interface metaModel {
   title:string;
+  routeId?:number;  //临时保存，用户请求该页面的按钮权限
   icon?:string;
   affix?:boolean;
-  noCache?:boolean
+  noCache?:boolean;
 }
 
 export interface addRouterMode extends RouterModel{

@@ -6,7 +6,9 @@ import "./element"
 import "./icons"
 import "normalize.css/normalize.css"
 import toast from "./toast"
+import permission from "@/directive/permission"
 
 Vue.use(toast);
+Vue.use(permission);
 
 

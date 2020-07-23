@@ -14,6 +14,9 @@ function loadView(viewPath:string){
  */
 export function filterRoutes(constantRoutes: RouterModel[]) {
   return constantRoutes.filter((route) => {
+    if (route.id) {
+      route.meta.routeId = route.id
+    }
     if (route.component) {
       if (route.component === "Layout") {
         route.component = Layout;
