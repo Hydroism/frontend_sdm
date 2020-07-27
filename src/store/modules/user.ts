@@ -7,7 +7,8 @@ import {resetRouter} from "@/router";
 const state = {
   token: '',
   avatar: '',
-  roles: []
+  roles: [],
+  rolePermission: ''
 };
 
 const mutations = {
@@ -19,6 +20,9 @@ const mutations = {
   },
   SET_ROLES: (state: any, roles: string[]) => {
     state.roles = roles
+  },
+  SET_ROLE_PERMISSION: (state: any, rolePermission: string) => {
+    state.rolePermission = rolePermission
   }
 };
 
@@ -26,11 +30,12 @@ const actions = {
   login({commit}: ActionContext<any, any>, loginFormData: loginFormDataModel) {
     return new Promise(((resolve, reject) => {
       userService.postLogin(loginFormData).then(res => {
-        const {token, avatar, roles} = res.data;
+        const {token, avatar, roles, rolePermission} = res.data;
 
         commit('SET_TOKEN', token);
         commit('SET_AVATAR', avatar);
         commit('SET_ROLES', roles);
+        commit('SET_ROLE_PERMISSION', rolePermission);
 
         setToken(token);
         resolve();
@@ -43,7 +48,8 @@ const actions = {
   logout({commit}: ActionContext<any, any>) {
     commit('SET_TOKEN', '');
     commit('SET_AVATAR', '');
-    commit('SET_ROLES', '');
+    commit('SET_ROLES', []);
+    commit('SET_ROLE_PERMISSION', '');
 
     removeToken();
     resetRouter();
@@ -58,7 +64,7 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
 
-        const {token, avatar, roles} = data;
+        const {token, avatar, roles, rolePermission} = data;
 
         // roles must be a non-empty array
         if (!roles || roles.length <= 0) {
@@ -68,6 +74,7 @@ const actions = {
         commit('SET_TOKEN', token);
         commit('SET_AVATAR', avatar);
         commit('SET_ROLES', roles);
+        commit('SET_ROLE_PERMISSION', rolePermission);
 
         resolve(data);
       }).catch(error => {
@@ -79,7 +86,8 @@ const actions = {
 
 const getters = {
   token: (state: any) => state.token,
-  roles: (state: any) => state.roles
+  roles: (state: any) => state.roles,
+  rolePermission: (state: any) => state.rolePermission
 };
 
 export default {

@@ -11,22 +11,19 @@ export default (Vue: any) => {
       const menuId = vue.$route.meta.routeId;
       const permissionButtonObj = store.getters["permission/permissionButton"](menuId);
 
-
+      //没有按钮权限码，正常显示
       if (!permissionButtonObj || !permissionButtonObj[value]) {
-        console.log(value, "没有查到权限码,不受限制");
         return
       }
 
+      //有按钮权限码，与用户权限码做校验
       const temp = {permissionCode: permissionButtonObj[value]};
-
-      const isShow = hasPermission('123,123,,,,,,1', temp);
-
-      console.log(value, "显示？", isShow);
+      const rolePermission = store.getters['user/rolePermission'];
+      const isShow = hasPermission(rolePermission, temp);
 
       if (!isShow) {
         el.parentNode && el.parentNode.removeChild(el)
       }
-
     }
   })
 }

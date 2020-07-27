@@ -4,15 +4,15 @@ export interface PostRoleModel {
   description: string;
 }
 
+export interface RoleDetailModel extends PostRoleModel {
+  routers: number[]
+}
+
 export interface RoleModel {
   id: number;
   roleName: string;
   roleCode: string;
   description: string;
-}
-
-export interface RoleDetailModel extends PostRoleModel {
-  routers: number[]
 }
 
 export interface ButtonPermission {

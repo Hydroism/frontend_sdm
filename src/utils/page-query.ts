@@ -27,6 +27,3 @@ export class PageQuery {
   }
 }
 
-class PageResponse {
-  count: number = 0;
-}
