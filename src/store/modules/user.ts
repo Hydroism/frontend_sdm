@@ -33,9 +33,9 @@ const actions = {
         const {token, avatar, roles, rolePermission} = res.data;
 
         commit('SET_TOKEN', token);
-        commit('SET_AVATAR', avatar);
-        commit('SET_ROLES', roles);
-        commit('SET_ROLE_PERMISSION', rolePermission);
+        // commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80');
+        // commit('SET_ROLES', roles);
+        // commit('SET_ROLE_PERMISSION', rolePermission);
 
         setToken(token);
         resolve();
@@ -72,7 +72,7 @@ const actions = {
         }
 
         commit('SET_TOKEN', token);
-        commit('SET_AVATAR', avatar);
+        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80');
         commit('SET_ROLES', roles);
         commit('SET_ROLE_PERMISSION', rolePermission);
 
@@ -87,7 +87,8 @@ const actions = {
 const getters = {
   token: (state: any) => state.token,
   roles: (state: any) => state.roles,
-  rolePermission: (state: any) => state.rolePermission
+  rolePermission: (state: any) => state.rolePermission,
+  avatar: (state: any) => state.avatar
 };
 
 export default {

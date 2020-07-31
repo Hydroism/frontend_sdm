@@ -47,8 +47,8 @@ import {Route} from "vue-router";
 @Component
 export default class login extends Vue {
   loginFormData: loginFormDataModel = {
-    username: '',
-    password: ''
+    username: 'admin',
+    password: '123456'
   };
   loginRules: object = {
     username: [
@@ -86,7 +86,7 @@ export default class login extends Vue {
 
     try {
       await this.$store.dispatch('user/login', this.loginFormData);
-      await this.$store.dispatch('permission/getRoleRouter');
+      // await this.$store.dispatch('permission/getRoleRouter');
 
       await this.$router.push({path: this.redirect || '/', query: this.otherQuery});
       this.loading = false
