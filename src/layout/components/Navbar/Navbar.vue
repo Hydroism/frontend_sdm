@@ -5,10 +5,9 @@
     <breadcrumb class="breadcrumb-container" />
 
     <div class="right-menu">
-<!--      <template v-if="device !== 'mobile'">-->
-<!---->
-<!--        <screenfull id="screenfull" class="right-menu-item hover-effect" />-->
-<!--      </template>-->
+      <template v-if="!isMobile">
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+      </template>
 
       <el-dropdown class="avatar-container">
         <div class="avatar-wrapper">
@@ -35,21 +34,29 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 import Hamburger from "@/layout/components/Navbar/Hamburger.vue";
 import Breadcrumb from "@/layout/components/Navbar/Breadcrumb.vue";
+import Screenfull from "@/layout/components/Screenfull/Screenfull.vue";
 import {namespace} from "vuex-class";
+import {DeviceEnum} from "@/store/modules/app";
 
 const userModule = namespace('user');
+const appModule = namespace('app');
 
 @Component({
-  components: {Hamburger, Breadcrumb}
+  components: {Hamburger, Breadcrumb, Screenfull}
 })
 
 export default class Navbar extends Vue {
   @userModule.Getter('avatar') avatar!:string;
+  @appModule.Getter('device') device!: DeviceEnum;
 
   async logout(){
     await this.$store.dispatch('user/logout');
     this.$router.push(`/login?redirect=${this.$route.fullPath}`)
   };
+
+  get isMobile():boolean{
+    return this.device === DeviceEnum.mobile
+  }
 
   personalCenter(){
     console.log('前往个人中心');

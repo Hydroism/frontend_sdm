@@ -28,8 +28,7 @@ export default class Screenfull extends Vue {
     screenfull.toggle()
   };
   change() {
-    //@ts-ignore
-    this.isFullscreen = screenfull.isFullscreen
+    this.isFullscreen = (screenfull as any).isFullscreen
   };
   init() {
     if (screenfull.isEnabled) {
