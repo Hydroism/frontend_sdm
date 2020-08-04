@@ -67,13 +67,14 @@
       }
     }
 
-    .is-active > .el-submenu__title {
-      //color: $menu-color-active !important;
-    }
+    // 子菜单激活后，父菜单的样式
+    //.is-active > .el-submenu__title {
+    //  color: $menu-color-active !important;
+    //}
 
     & .nest-menu .el-submenu > .el-submenu__title,
     & .el-submenu .el-menu-item {
-      background-color: $menu-background !important;
+      //background-color: $menu-background !important;
 
       &:hover {
         background-color: $menu-hover !important;
@@ -87,16 +88,16 @@
   .hideSidebar {
     .sidebar-container {
       width: $base-left-menu-width-min !important;
+      /*另外添加的*/
+      .svg-icon {
+        margin-right: 20px;
+      }
     }
 
     .main-container {
       margin-left: $base-left-menu-width-min;
     }
 
-    /*另外添加的*/
-    .svg-icon {
-      margin-right: 20px;
-    }
   }
 
   .el-menu--vertical .el-menu-item .svg-icon {
@@ -124,7 +125,7 @@
     }
   }
 
-  .nest-menu .el-submenu > .el-submenu__title,
+  .el-submenu > .el-submenu__title,
   .el-menu-item {
     &:hover {
       // you can use $subMenuHover

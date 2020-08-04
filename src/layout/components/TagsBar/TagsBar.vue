@@ -45,8 +45,12 @@ export default class TagsBar extends Vue {
   top: number = 0;
 
   @Watch('$route')
-  onRouteChange(): void {
+  onRouteChange(route:Route): void {
     this.addTags();
+    // if you go to the redirect page, do not update the tagsBar
+    if (route.path.startsWith('/redirect/')) {
+      return
+    }
     this.tabActive = this.$route.path
   }
 
@@ -112,7 +116,7 @@ export default class TagsBar extends Vue {
   addTags(): void {
     const {name} = this.$route;
     if (name) {
-      this.$store.dispatch('tagsBar/addVisitedRoute', this.$route)
+      this.$store.dispatch('tagsBar/addView', this.$route)
     }
   };
 
@@ -133,7 +137,7 @@ export default class TagsBar extends Vue {
     const route: VisitedRoute | undefined = this.visitedRoutes.find(e => {
       return tab === e.path
     });
-    const visitedRoutes = await this.$store.dispatch('tagsBar/delVisitedRoute', route);
+    const visitedRoutes = await this.$store.dispatch('tagsBar/delView', route);
 
     if (this.isActive(tab)) {
       this.toLastView(visitedRoutes, route as VisitedRoute)

@@ -1,4 +1,3 @@
-import path from "path";
 <template>
   <div style="user-select: none;">
     <el-submenu v-if="isHaveChildren(item.children, item)" :index="resolvePath(item.path)">

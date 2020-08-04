@@ -49,7 +49,9 @@ const route = [
         name: 'roleManagement',
         component: 'permission/roleManagement',
         meta: {
-          title: '角色管理'
+          title: '角色管理',
+          noCache:true,
+          affix: true
         }
       },
       {

@@ -64,7 +64,7 @@ export default class login extends Vue {
   redirect: any = undefined;
   otherQuery: any = {};
 
-  @Watch('$route')
+  @Watch('$route',{immediate:true})
   changeRoute(route: Route): void {
     const query = route.query;
     if (query) {

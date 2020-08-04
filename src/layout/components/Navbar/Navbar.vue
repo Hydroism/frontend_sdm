@@ -7,9 +7,11 @@
     <div class="right-menu">
       <template v-if="!isMobile">
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
+
+        <refresh id="refresh" class="right-menu-item hover-effect" />
       </template>
 
-      <el-dropdown class="avatar-container">
+      <el-dropdown class="avatar-container right-menu-item">
         <div class="avatar-wrapper">
           <img :src="avatar" class="user-avatar" alt="" />
           <i class="el-icon-caret-bottom" />
@@ -35,6 +37,7 @@ import {Component, Prop, Vue} from "vue-property-decorator"
 import Hamburger from "@/layout/components/Navbar/Hamburger.vue";
 import Breadcrumb from "@/layout/components/Navbar/Breadcrumb.vue";
 import Screenfull from "@/layout/components/Screenfull/Screenfull.vue";
+import Refresh from "@/layout/components/Refresh/Refresh.vue";
 import {namespace} from "vuex-class";
 import {DeviceEnum} from "@/store/modules/app";
 
@@ -42,7 +45,7 @@ const userModule = namespace('user');
 const appModule = namespace('app');
 
 @Component({
-  components: {Hamburger, Breadcrumb, Screenfull}
+  components: {Hamburger, Breadcrumb, Screenfull, Refresh}
 })
 
 export default class Navbar extends Vue {
@@ -80,6 +83,28 @@ export default class Navbar extends Vue {
     float: right;
     height: 100%;
     line-height: 50px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .right-menu-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 20px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+
+      &.hover-effect {
+        cursor: pointer;
+        transition: background .3s;
+
+        &:hover {
+          background: rgba(0, 0, 0, .025)
+        }
+      }
+    }
   }
 
   .avatar-container {

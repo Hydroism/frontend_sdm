@@ -19,7 +19,8 @@ router.beforeEach(async (to, from, next) => {
       const hasRoles = store.getters['user/roles'] && store.getters['user/roles'].length > 0;
 
       if (hasRoles) {
-        if (to.meta.routeId) {
+        //获取该页面的功能权限码 && 如果store已经有了，则跳过请求进入页面
+        if (to.meta.routeId && !store.getters['permission/permissionButton'](to.meta.routeId)) {
           await store.dispatch('permission/setPermissionButtons', to.meta.routeId);
         }
         next()

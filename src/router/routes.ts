@@ -14,6 +14,16 @@ export const constantRoutes: Array<RouteConfig> = [
     path: '/404',
     component: () => import('@/views/error-page/404.vue')
   },
+  {
+    path: '/',
+    component: Layout,
+    children: [
+      {
+        path: 'redirect/:path(.*)',
+        component: () => import('@/views/redirect/redirect.vue')
+      }
+    ]
+  }
   // {
   //   path: '*',
   //   redirect:'/404'
@@ -67,7 +77,7 @@ export const asyncRoutes: Array<RouteConfig> = [
         path: '401',
         name: '401',
         component: () => import('@/views/nested/index.vue'),
-        children:[
+        children: [
           {
             path: 'asdf',
             name: '401',

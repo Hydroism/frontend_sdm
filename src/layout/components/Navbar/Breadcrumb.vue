@@ -10,14 +10,18 @@
 
 <script lang="ts">
 import {Component, Prop, Vue, Watch} from "vue-property-decorator"
-import {RouteRecord} from "vue-router/types/router";
+import {Route, RouteRecord} from "vue-router/types/router";
 
 @Component
 export default class Breadcrumb extends Vue {
   levelList:RouteRecord[] = [];
 
   @Watch('$route',{immediate:true})
-  onRouteChange():void{
+  onRouteChange(route:Route):void{
+    // if you go to the redirect page, do not update the breadcrumbs
+    if (route.path.startsWith('/redirect/')) {
+      return
+    }
     this.getBreadcrumb();
   }
 

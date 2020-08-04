@@ -15,7 +15,6 @@ const mutations = {
     state.routes = routes
   },
   SET_PERMISSION_BUTTON: (state: any, {menuId, permissionButton}: { menuId: number, permissionButton: { [key: string]: string } }) => {
-    console.log(menuId, permissionButton);
     state.permissionButton[menuId] = permissionButton
   }
 };

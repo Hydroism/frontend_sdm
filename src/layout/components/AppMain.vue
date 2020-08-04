@@ -1,8 +1,8 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive>
-        <router-view />
+      <keep-alive :include="cachedViews">
+        <router-view :key="key"/>
       </keep-alive>
     </transition>
   </section>
@@ -10,9 +10,17 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from "vue-property-decorator"
+import {namespace} from "vuex-class";
 
+const tagsBarModule = namespace('tagsBar');
+
+@Component
 export default class AppMain extends Vue {
+  @tagsBarModule.Getter('cachedRoutes') cachedViews!: any[];
 
+  get key(): string {
+    return this.$route.path
+  }
 }
 
 </script>
@@ -30,7 +38,7 @@ export default class AppMain extends Vue {
       min-height: calc(100vh - #{$base-nav-bar-height} - #{$base-tags-bar-height});
     }
 
-    .fixed-header+.app-main {
+    .fixed-header + .app-main {
       padding-top: 84px;
     }
   }
