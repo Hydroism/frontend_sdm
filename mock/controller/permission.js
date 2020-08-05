@@ -95,7 +95,7 @@ const route = [
       {
         path: 'a401',
         name: 'a401',
-        component: 'views/error-page/401',
+        component: 'error-page/401',
         meta: {
           title: '首页6',
           icon: 'edit',
@@ -114,7 +114,7 @@ const route = [
       {
         path: 'b401',
         name: '401',
-        component: 'views/nested/index',
+        component: 'nested/index',
         meta: {
           title: '首页8',
           icon: 'edit',
@@ -123,7 +123,7 @@ const route = [
           {
             path: 'asdf',
             name: '401',
-            component: 'views/About',
+            component: 'About',
             meta: {
               title: '首页9',
               icon: 'edit'
@@ -132,7 +132,7 @@ const route = [
           {
             path: 'asdf2',
             name: '401',
-            component: 'views/About',
+            component: 'About',
             meta: {
               title: '首页10',
               icon: 'edit',
@@ -143,7 +143,7 @@ const route = [
       {
         path: 'about',
         name: 'about',
-        component: 'views/About',
+        component: 'About',
         meta: {
           title: '首页11',
           icon: 'edit',
@@ -152,7 +152,7 @@ const route = [
       {
         path: '401',
         name: '401',
-        component: 'views/error-page/401',
+        component: 'error-page/401',
         meta: {
           title: '首12',
           icon: 'edit',

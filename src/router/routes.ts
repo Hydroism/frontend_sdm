@@ -23,11 +23,7 @@ export const constantRoutes: Array<RouteConfig> = [
         component: () => import('@/views/redirect/redirect.vue')
       }
     ]
-  }
-  // {
-  //   path: '*',
-  //   redirect:'/404'
-  // },
+  },
 ];
 
 

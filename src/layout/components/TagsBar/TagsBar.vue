@@ -4,7 +4,6 @@
     <el-tabs
       type="card" class="tags-content" v-model="tabActive" :stretch="false"
       @tab-click="handleTabClick" @tab-remove="handleTabRemove"
-      @contextmenu.prevent.native="openMenu"
     >
       <el-tab-pane
         v-for="item in visitedRoutes" :key="item.path"
@@ -12,11 +11,11 @@
       />
     </el-tabs>
 
-    <!--todo 右键菜单-->
-    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li>Refresh</li>
-      <li>Close</li>
-    </ul>
+    <!--右键菜单-->
+<!--    <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">-->
+<!--      <li>Refresh</li>-->
+<!--      <li>Close</li>-->
+<!--    </ul>-->
 
   </div>
 </template>
@@ -74,6 +73,7 @@ export default class TagsBar extends Vue {
   };
 
   isActive(path:string): boolean {
+    console.log(this.$route.path, path);
     return this.$route.path === path
   };
 
@@ -137,8 +137,9 @@ export default class TagsBar extends Vue {
     const route: VisitedRoute | undefined = this.visitedRoutes.find(e => {
       return tab === e.path
     });
-    const visitedRoutes = await this.$store.dispatch('tagsBar/delView', route);
+    const {visitedRoutes} = await this.$store.dispatch('tagsBar/delView', route);
 
+    // bug
     if (this.isActive(tab)) {
       this.toLastView(visitedRoutes, route as VisitedRoute)
     }

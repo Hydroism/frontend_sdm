@@ -36,8 +36,8 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 import Hamburger from "@/layout/components/Navbar/Hamburger.vue";
 import Breadcrumb from "@/layout/components/Navbar/Breadcrumb.vue";
-import Screenfull from "@/layout/components/Screenfull/Screenfull.vue";
-import Refresh from "@/layout/components/Refresh/Refresh.vue";
+import Screenfull from "@/layout/components/Navbar/Screenfull.vue";
+import Refresh from "@/layout/components/Navbar/Refresh.vue";
 import {namespace} from "vuex-class";
 import {DeviceEnum} from "@/store/modules/app";
 

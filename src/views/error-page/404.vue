@@ -56,11 +56,9 @@ export default class Page404 extends Vue{
 
   mounted() {
     this.timeChange();
-    document.body.style.background = "#ffffff";
   };
   beforeDestroy() {
     clearInterval(this.timer);
-    document.body.style.background = "#f2f2f2";
   };
   timeChange() {
     this.timer = setInterval(() => {

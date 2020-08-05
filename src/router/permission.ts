@@ -3,6 +3,7 @@ import NProgress from "nprogress";
 import store from "@/store";
 import {getToken} from "@/utils/auth";
 import "nprogress/nprogress.css"
+import {RouterModel} from "@/model/router.model";
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
@@ -31,7 +32,8 @@ router.beforeEach(async (to, from, next) => {
           const {roles} = await store.dispatch('user/getUserInfo');
 
           // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/getRoleRouter', roles);
+          let accessRoutes = await store.dispatch('permission/getRoleRouter', roles);
+          accessRoutes.push({path: '*', redirect: '/404'});
 
           // dynamically add accessible routes
           router.addRoutes(accessRoutes);
