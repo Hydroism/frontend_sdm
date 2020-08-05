@@ -38,26 +38,35 @@ import ThemePicker from "@/components/ThemePicker/ThemePicker.vue";
 const settingModule = namespace('setting');
 
 @Component({
-  components:{ThemePicker}
+  components: {ThemePicker}
 })
 export default class RightPanel extends Vue {
   @settingModule.Getter('theme') theme!: string;
-  @settingModule.Getter('fixedHeader') fixedHeader!: boolean;
+  @settingModule.Getter('fixedHeader') fixedHeader2!: boolean;
   @settingModule.Getter('tagsBar') tagsBar2!: boolean;
 
   drawerVisible: boolean = false;
-  sidebarLogo:boolean = true;
+  sidebarLogo: boolean = true;
 
-  get tagsBar():boolean{
+  get tagsBar(): boolean {
     return this.tagsBar2
   };
 
-  set tagsBar(val:boolean){
-    this.$store.dispatch('setting/changeSetting', {key:'tagsBar', value:val})
+  set tagsBar(val: boolean) {
+    this.$store.dispatch('setting/changeSetting', {key: 'tagsBar', value: val})
   }
 
-  // todo 功能后面在做
-  themeChange(){}
+  get fixedHeader(): boolean {
+    return this.fixedHeader2
+  }
+
+  set fixedHeader(val: boolean) {
+    this.$store.dispatch('setting/changeSetting', {key: 'fixedHeader', value: val})
+  }
+
+  themeChange(val: string) {
+    this.$store.dispatch('setting/changeSetting', {key: 'theme', value: val})
+  }
 }
 </script>
 
@@ -83,7 +92,7 @@ export default class RightPanel extends Vue {
     }
   }
 
-  .el-drawer{
+  .el-drawer {
     .drawer-item {
       color: rgba(0, 0, 0, .65);
       font-size: 14px;
