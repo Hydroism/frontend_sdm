@@ -45,14 +45,22 @@ const actions = {
     }))
   },
 
-  logout({commit}: ActionContext<any, any>) {
-    commit('SET_TOKEN', '');
-    commit('SET_AVATAR', '');
-    commit('SET_ROLES', []);
-    commit('SET_ROLE_PERMISSION', '');
+  logout({commit, dispatch}: ActionContext<any, any>) {
+    return new Promise(async resolve => {
+      //clear userInfo
+      commit('SET_TOKEN', '');
+      commit('SET_AVATAR', '');
+      commit('SET_ROLES', []);
+      commit('SET_ROLE_PERMISSION', '');
 
-    removeToken();
-    resetRouter();
+      //clear cacheRoutes
+      await dispatch('tagsBar/delAllView', null, {root: true});
+
+      removeToken();
+      resetRouter();
+
+      resolve();
+    })
   },
 
   getUserInfo({commit}: ActionContext<any, any>) {

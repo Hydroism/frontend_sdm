@@ -8,16 +8,19 @@
         <el-input v-model="formData.name"/>
       </el-form-item>
       <el-form-item label="视图" prop="component">
-        <el-select v-model="formData.component" filterable style="width:100%">
+        <el-select v-model="formData.component" filterable style="width:100%" v-if="isNew">
           <el-option v-for="item in componentList" :key="item" :label="item" :value="item"/>
         </el-select>
+        <span v-else>{{ formData.component }}</span>
       </el-form-item>
       <el-form ref="formMeta" :model="formData.meta" :rules="rulesMeta" label-width="100px">
         <el-form-item label="菜单名称" prop="title">
           <el-input v-model="formData.meta.title"/>
         </el-form-item>
         <el-form-item label="图标" prop="icon">
-          <el-input v-model="formData.meta.icon"/>
+          <svg-icon v-if="formData.meta.icon" :icon-class="formData.meta.icon" style="margin-right:15px"/>
+          <el-button @click="openSvgDialog">更换图标</el-button>
+          <!--          <el-input v-model="formData.meta.icon"/>-->
         </el-form-item>
         <el-form-item label="是否固定" prop="affix">
           <el-switch v-model="formData.meta.affix"/>
@@ -40,6 +43,8 @@
       <el-button type="primary" @click="handleConfirm" :loding="submitLoading">确认</el-button>
     </div>
 
+    <SvgSelectionDialog ref="svgSelectionDialog" @handleSelect="handleSelectIcon"/>
+
   </hy-dialog>
 </template>
 
@@ -52,6 +57,7 @@ import permissionService from "@/api/permissionService";
 import {elValidateAlphabetNumber} from "@/utils/validateEl";
 import {RoleModel} from "@/model/permission.model";
 import COMPONENT_LIST from "@/constant/componentList"
+import SvgSelectionDialog from "@/components/SvgIcon/SvgSelectionDialog.vue";
 
 class Router {
   id = 0;
@@ -67,7 +73,7 @@ class Router {
 }
 
 @Component({
-  components: {HyDialog}
+  components: {HyDialog, SvgSelectionDialog}
 })
 export default class MenuEditDialog extends Vue {
   dialogVisible: boolean = false;
@@ -78,7 +84,7 @@ export default class MenuEditDialog extends Vue {
    */
   submitLoading: boolean = false;
 
-  parentId!: number | undefined;
+  parentId: number = 0;
   componentList: string[] = COMPONENT_LIST;
 
   formData: RouterModel = new Router();
@@ -106,6 +112,10 @@ export default class MenuEditDialog extends Vue {
     this.getAllRole();
   };
 
+  get isNew(): boolean {
+    return !!this.parentId
+  };
+
   getAllRole() {
     permissionService.getAllRole().then(res => {
       this.roleList = res.data
@@ -121,7 +131,7 @@ export default class MenuEditDialog extends Vue {
 
   openDialog({parentId, data}: { parentId: number, data: RouterModel }): void {
     //初始化所有数据
-    this.parentId = undefined;
+    this.parentId = 0;
     this.formData = new Router();
     this.roleCheckAll = false;
     this.checkedRoles = [];
@@ -152,6 +162,14 @@ export default class MenuEditDialog extends Vue {
     this.roleCheckAll = checkedCount === this.roleList.length;
     this.isIndeterminate = checkedCount > 0 && checkedCount < this.roleList.length
   };
+
+  openSvgDialog() {
+    (this.$refs.svgSelectionDialog as any).openDialog(this.formData.meta.icon);
+  };
+
+  handleSelectIcon({icon}: { icon: string }) {
+    this.$set(this.formData.meta, 'icon', icon)
+  }
 
   handleConfirm() {
     (this.$refs.form as any).validate((valid: boolean) => {

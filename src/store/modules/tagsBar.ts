@@ -34,13 +34,18 @@ const mutations = {
   },
 
   //更新标签(query参数变化了)
-  UPDATE_VISITED_ROUTES: (state: any, view: Route) => {
+  UPDATE_VISITED_ROUTES(state: any, route: Route) {
     for (let v of state.visitedViews) {
-      if (v.path === view.path) {
-        v = Object.assign(v, view)
+      if (v.path === route.path) {
+        v = Object.assign(v, route)
         break
       }
     }
+  },
+
+  ALL_VISITED_ROUTES(state: any) {
+    // keep affix tags
+    state.visitedRoutes = state.visitedRoutes.filter((tag: Route) => tag.meta.affix)
   },
 
   /**
@@ -84,8 +89,18 @@ const actions = {
       dispatch('delVisitedRoute', route)
       dispatch('delCachedRoute', route)
       resolve({
-        visitedRoutes:[...state.visitedRoutes],
-        cachedRoutes:[...state.cachedRoutes]
+        visitedRoutes: [...state.visitedRoutes],
+        cachedRoutes: [...state.cachedRoutes]
+      })
+    })
+  },
+  delAllView({dispatch, state}: ActionContext<any, any>) {
+    return new Promise(resolve => {
+      dispatch('delAllVisitedRoutes')
+      dispatch('delAllCachedRoutes')
+      resolve({
+        visitedRoutes: [...state.visitedRoutes],
+        cachedRoutes: [...state.cachedRoutes]
       })
     })
   },
@@ -104,6 +119,12 @@ const actions = {
   delVisitedRoute({commit, state}: ActionContext<any, any>, route: Route) {
     return new Promise(resolve => {
       commit('DEL_VISITED_ROUTE', route);
+      resolve([...state.visitedRoutes])
+    })
+  },
+  delAllVisitedRoutes({commit, state}: ActionContext<any, any>) {
+    return new Promise(resolve => {
+      commit('ALL_VISITED_ROUTES');
       resolve([...state.visitedRoutes])
     })
   },

@@ -54,7 +54,7 @@ export default class Navbar extends Vue {
 
   async logout(){
     await this.$store.dispatch('user/logout');
-    this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    this.$router.push(`/login`)
   };
 
   get isMobile():boolean{
