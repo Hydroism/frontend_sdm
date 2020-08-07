@@ -9,6 +9,12 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 import {isExternal} from "@/utils/validate";
 
+/**
+ * 需要添加新的svg矢量图，可通过www.iconfont.cn里面下载
+ * 将svg图片添加到src/plugins/icons/svg目录中即可
+ * https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&cid=19238
+ */
+
 @Component
 export default class SvgIcon extends Vue {
   @Prop({required: true})
