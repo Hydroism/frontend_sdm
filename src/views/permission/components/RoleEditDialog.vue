@@ -70,6 +70,7 @@ import routerService from "@/api/routerService";
 import {HyTable} from "@/components/HyTable";
 import {addPermission, delPermission, hasPermission} from "@/utils/permission"
 import {PermissionButtonItem} from "@/model/permission.model";
+import {ElForm} from "element-ui/types/form";
 
 @Component({
   components: {HyDialog, HyTable}
@@ -141,6 +142,7 @@ export default class RoleEditDialog extends Vue {
   closeDialog() {
     //清空树，避免再次打开的时候树的checked还在
     (this.$refs.tree as any).setCheckedKeys([]);
+    (this.$refs['form'] as ElForm).resetFields();
 
     this.dialogVisible = false;
   };

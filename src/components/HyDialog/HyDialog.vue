@@ -22,5 +22,8 @@ export default class HyDialog extends Vue {
 </script>
 
 <style scoped lang='scss'>
+  ::v-deep .el-dialog__body {
+    overflow: hidden;
+  }
 
 </style>

@@ -58,6 +58,7 @@ import {elValidateAlphabetNumber} from "@/utils/validateEl";
 import {RoleModel} from "@/model/permission.model";
 import COMPONENT_LIST from "@/constant/componentList"
 import SvgSelectionDialog from "@/components/SvgIcon/SvgSelectionDialog.vue";
+import {ElForm} from "element-ui/types/form";
 
 class Router {
   id = 0;
@@ -149,6 +150,8 @@ export default class MenuEditDialog extends Vue {
   };
 
   closeDialog() {
+    (this.$refs['form'] as ElForm).resetFields();
+    (this.$refs['formMeta'] as ElForm).resetFields();
     this.dialogVisible = false;
   };
 

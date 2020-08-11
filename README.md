@@ -215,6 +215,8 @@ log()
 ```
 除了通过引入权限空间的概念突破二进制运算的位数限制，还可以使用 math.js 的 bignumber，直接运算超过 32 位的二进制数。
 
+## 权限的应用
+
 
 ## 开发
 ```
@@ -224,7 +226,9 @@ git clone https://github.com/Hydroism/frontend_sdm.git
 # 进入项目
 cd frontend_sdm
 
-# 安装依赖
+# 安装依赖(npm^6.12.1)
+# npm版本过低会安装失败
+# npm install -g npm 升级最新版本
 npm install --registry=https://registry.npm.taobao.org
 
 # 启动服务
