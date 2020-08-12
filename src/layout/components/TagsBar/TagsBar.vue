@@ -197,7 +197,7 @@ export default class TagsBar extends Vue {
     padding-right: $base-padding;
 
     .tags-content {
-      width: calc(100% - 90px);
+      width: 100%;
       height: $base-tag-item-height;
 
       ::v-deep {

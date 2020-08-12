@@ -28,9 +28,10 @@ export default class TableSearchBar extends Vue {
 
 <style scoped lang='scss'>
 .form-search-bar{
-  display: inline-block;
+  display: flex;
   .el-input{
-    width: 200px;
+    max-width: 200px;
+    min-width: 100px;
   }
 }
 </style>

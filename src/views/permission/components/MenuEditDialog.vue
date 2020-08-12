@@ -175,8 +175,8 @@ export default class MenuEditDialog extends Vue {
   }
 
   handleConfirm() {
-    (this.$refs.form as any).validate((valid: boolean) => {
-      (this.$refs.formMeta as any).validate((valid2: boolean) => {
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      (this.$refs.formMeta as ElForm).validate((valid2: boolean) => {
         if (valid && valid2) {
           this.saveForm();
         }
