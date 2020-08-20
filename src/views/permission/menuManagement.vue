@@ -61,6 +61,7 @@ import ButtonPermission from "./components/ButtonPermission.vue";
 import routerService from "@/api/routerService";
 import {RouterModel} from "@/model/router.model";
 import {cloneDeep} from "lodash"
+import menusService from "@/api/menusService";
 
 @Component({
   components: {MenuEditDialog, ButtonPermission}
@@ -76,8 +77,9 @@ export default class menuManagement extends Vue {
   };
 
   getData(): void {
-    routerService.getRouterList().then(res => {
+    menusService.getMenusList().then(res => {
       this.routeList = res.data;
+
     })
   };
 

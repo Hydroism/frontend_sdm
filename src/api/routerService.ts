@@ -10,12 +10,6 @@ const routerService = {
     return get('mock/permission/routerList')
   },
 
-  /**
-   * 所有的菜单路由列表
-   */
-  getRouterList(): Promise<ResponseModel<RouterModel[]>> {
-    return get('mock/router/routerList')
-  },
 
   /**
    * 添加菜单路由

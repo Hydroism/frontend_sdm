@@ -72,6 +72,7 @@ import {addPermission, delPermission, hasPermission} from "@/utils/permission"
 import {PermissionButtonItem} from "@/model/permission.model";
 import {ElForm} from "element-ui/types/form";
 import {ElTree} from "element-ui/types/tree";
+import menusService from "@/api/menusService";
 
 @Component({
   components: {HyDialog, HyTable}
@@ -115,7 +116,7 @@ export default class RoleEditDialog extends Vue {
   }
 
   getData() {
-    routerService.getRouterList().then(res => {
+    menusService.getMenusList().then((res:any) => {
       this.routeList = res.data;
     })
   };
@@ -158,6 +159,7 @@ export default class RoleEditDialog extends Vue {
   }
 
   handleConfirm() {
+    //todo 角色权限为空的用0表示
     console.log((this.$refs.tree as ElTree<any,any>).getCheckedKeys());
   };
 

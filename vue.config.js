@@ -54,7 +54,7 @@ module.exports = {
   runtimeCompiler: true,
   productionSourceMap: false,
   css: {
-    extract:true,
+    extract: true,
     requireModuleExtension: true,
     sourceMap: false,
     loaderOptions: {
@@ -66,23 +66,22 @@ module.exports = {
 
   // webpack-dev-server 相关配置
   devServer: {
+    host: 'localhost',
     port: 3001,
-    open: true,
+    // open: true,
     overlay: {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   // change xxx-api/login => mock/login
-    //   // detail: https://cli.vuejs.org/config/#devserver-proxy
-    //   '/api': {
-    //     target: `http://localhost:3001`,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '/api': '/mock'
-    //     }
-    //   }
-    // },
+    // mock代理
+    proxy: {
+    //   change xxx-api/login => mock/login
+      // detail: https://cli.vuejs.org/config/#devserver-proxy
+      '/api/v1.0': {
+        target: 'http://106.52.130.250:8080',
+        changeOrigin: true
+      }
+    },
     before: require('./mock/mock-server.js')
   },
 

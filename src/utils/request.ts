@@ -1,14 +1,14 @@
 import axios from "axios"
 import config from "@/utils/config";
 import store from '@/store'
-import {Loading} from "element-ui";
 import {errorToast} from "@/plugins/toast";
+import vue from "@/main";
 
 const baseUrl = config.baseUrl;
 
 const service = axios.create({
   baseURL: baseUrl,
-  timeout: 5000
+  timeout: 20000
 });
 
 let elMessage: any;
@@ -34,7 +34,7 @@ service.interceptors.response.use(response => {
   elMessage = errorMsg(msg || '请求错误');
   return Promise.reject(response.data);
 
-}, err => {
+}, async err => {
   if (elMessage) {
     elMessage.close();
   }
@@ -50,9 +50,14 @@ service.interceptors.response.use(response => {
       break;
     case 401:
       elMessage = errorMsg('登陆失效,请重新登陆');
+      await store.dispatch('user/resetToken');
+      await vue.$router.replace('/login?redirect=' + vue.$route.fullPath);
       break;
     case 404:
       elMessage = errorMsg('未找到');
+      break;
+    case 500:
+      elMessage = errorMsg('服务器发生错误,请稍后再试~');
       break;
     default:
       elMessage = errorMsg('不知道为什么~请求就是报错了')

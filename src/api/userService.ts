@@ -7,7 +7,7 @@ const userService = {
    * 账号密码登陆
    */
   postLogin(params:loginFormDataModel):Promise<ResponseModel<UserInfoModel>>{
-    return post(`mock/user/login`, params)
+    return post(`api/v1.0/users/login/`, params)
   },
 
   /**
