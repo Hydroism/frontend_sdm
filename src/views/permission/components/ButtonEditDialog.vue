@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator"
+import {Component, Inject, InjectReactive, Prop, Vue} from "vue-property-decorator"
 import HyDialog from "@/components/HyDialog/HyDialog.vue";
 import permissionService from "@/api/permissionService";
 import {RoleModel} from "@/model/permission.model";
@@ -63,19 +63,9 @@ export default class ButtonEditDialog extends Vue {
   /**
    * 角色相关
    */
-  roleList: RoleModel[] = [];
+  @InjectReactive('allRoleList') roleList!: RoleModel[];
   roleCheckAll: boolean = false;
   isIndeterminate: boolean = false;
-
-  created() {
-    this.getAllRole();
-  };
-
-  getAllRole() {
-    permissionService.getAllRole().then(res => {
-      this.roleList = res.data
-    })
-  };
 
   openDialog({menuId, permissionButtonItem}: { menuId: number, permissionButtonItem: PermissionButtonItem }): void {
     //初始化表单

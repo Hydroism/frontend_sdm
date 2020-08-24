@@ -8,7 +8,6 @@ const baseUrl = config.baseUrl;
 
 const service = axios.create({
   baseURL: baseUrl,
-  timeout: 20000
 });
 
 let elMessage: any;

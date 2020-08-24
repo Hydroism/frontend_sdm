@@ -157,7 +157,7 @@ const data = [
 
 export default [
   {
-    url: 'mock/menus/list',
+    url: 'mock/menus/list/',
     type: 'get',
     response: config => {
       return {

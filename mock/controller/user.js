@@ -1,4 +1,5 @@
 const tokens = {
+  superman: "superman-accessToken",
   admin: "admin-accessToken",
   editor: "editor-accessToken",
   test: "test-accessToken",
