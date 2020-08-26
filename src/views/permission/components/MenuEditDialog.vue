@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Inject, InjectReactive, Prop, Vue} from "vue-property-decorator"
+import {Component, InjectReactive, Vue} from "vue-property-decorator"
 import HyDialog from "@/components/HyDialog/HyDialog.vue";
 import {addRouterMode, RouterModel} from "@/model/router.model";
 import routerService from "@/api/routerService";

@@ -6,6 +6,8 @@
 
     <div class="right-menu">
       <template v-if="!isMobile">
+        <settings id="setting" class="right-menu-item hover-effect" />
+
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
 
         <refresh id="refresh" class="right-menu-item hover-effect" />
@@ -40,12 +42,13 @@ import Screenfull from "@/layout/components/Navbar/Screenfull.vue";
 import Refresh from "@/layout/components/Navbar/Refresh.vue";
 import {namespace} from "vuex-class";
 import {DeviceEnum} from "@/store/modules/app";
+import Settings from "@/layout/components/Navbar/Settings.vue";
 
 const userModule = namespace('user');
 const appModule = namespace('app');
 
 @Component({
-  components: {Hamburger, Breadcrumb, Screenfull, Refresh}
+  components: {Hamburger, Breadcrumb, Screenfull, Refresh, Settings}
 })
 
 export default class Navbar extends Vue {

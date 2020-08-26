@@ -1,11 +1,8 @@
 <template>
   <div>
-    <div class="handle-button" :style="{'background-color':theme}" @click="drawerVisible=!drawerVisible">
-      <i class="el-icon-setting"/>
-    </div>
+    <svg-icon icon-class="setting" @click="click"/>
 
     <el-drawer title="主题配置" :visible.sync="drawerVisible" direction="rtl" append-to-body size="250px">
-
       <div class="drawer-item">
         <span>主题色</span>
         <theme-picker style="float: right;height: 26px;margin: -3px 8px 0 0;" @change="themeChange"/>
@@ -40,12 +37,12 @@ const settingModule = namespace('setting');
 @Component({
   components: {ThemePicker}
 })
-export default class RightPanel extends Vue {
+export default class Settings extends Vue {
   @settingModule.Getter('theme') theme!: string;
   @settingModule.Getter('fixedHeader') fixedHeader2!: boolean;
   @settingModule.Getter('tagsBar') tagsBar2!: boolean;
+  @settingModule.Getter('showSettings') drawerVisible2!: boolean;
 
-  drawerVisible: boolean = false;
   sidebarLogo: boolean = true;
 
   get tagsBar(): boolean {
@@ -62,6 +59,18 @@ export default class RightPanel extends Vue {
 
   set fixedHeader(val: boolean) {
     this.$store.dispatch('setting/changeSetting', {key: 'fixedHeader', value: val})
+  }
+
+  get drawerVisible(): boolean {
+    return this.drawerVisible2
+  }
+
+  set drawerVisible(val: boolean) {
+    this.$store.dispatch('setting/changeSetting', {key: 'showSettings', value: val})
+  }
+
+  click() {
+    this.$store.dispatch('setting/changeSetting', {key: 'showSettings', value: true})
   }
 
   themeChange(val: string) {
