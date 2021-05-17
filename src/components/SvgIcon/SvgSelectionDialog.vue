@@ -15,7 +15,6 @@
 import {Component, Prop, Vue} from "vue-property-decorator"
 import HyDialog from "@/components/HyDialog/HyDialog.vue";
 import svgIcons from "@/plugins/icons/svg-icons"
-import {RouterModel} from "@/model/router.model";
 
 @Component({
   components: {HyDialog}

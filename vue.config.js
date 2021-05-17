@@ -54,7 +54,7 @@ module.exports = {
   runtimeCompiler: true,
   productionSourceMap: false,
   css: {
-    extract:true,
+    extract: true,
     requireModuleExtension: true,
     sourceMap: false,
     loaderOptions: {
@@ -66,23 +66,48 @@ module.exports = {
 
   // webpack-dev-server 相关配置
   devServer: {
+    host: 'localhost',
     port: 3001,
-    open: true,
+    // open: true,
     overlay: {
       warnings: false,
       errors: true
     },
-    // proxy: {
-    //   // change xxx-api/login => mock/login
-    //   // detail: https://cli.vuejs.org/config/#devserver-proxy
-    //   '/api': {
-    //     target: `http://localhost:3001`,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '/api': '/mock'
-    //     }
-    //   }
-    // },
+    proxy: {
+      // api的使用线上服务器
+      // '/api': {
+      //   target: 'http://106.xx.xxx.xxx:8088',
+      //   changeOrigin: true,
+      //   // detail: https://blog.csdn.net/weixin_42212558/article/details/108196488
+      //   onProxyReq:function (proxyReq, req, res, options) {
+      //     if (req.body) {
+      //       let bodyData = JSON.stringify(req.body);
+      //       // incase if content-type is application/x-www-form-urlencoded -> we need to change to application/json
+      //       proxyReq.setHeader('Content-Type','application/json');
+      //       proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+      //       // stream the content
+      //       proxyReq.write(bodyData);
+      //     }
+      //   }
+      // },
+
+      //全部使用mock
+      '/api': {
+        target: 'http://localhost:3001',
+        pathRewrite: {
+          '^/api/v1.0': '/mock'
+        },
+        onProxyReq:function (proxyReq, req, res, options) {
+          if (req.body) {
+            let bodyData = JSON.stringify(req.body);
+            proxyReq.setHeader('Content-Type','application/json');
+            proxyReq.setHeader('Content-Length', Buffer.byteLength(bodyData));
+            proxyReq.write(bodyData);
+          }
+        }
+      }
+
+    },
     before: require('./mock/mock-server.js')
   },
 

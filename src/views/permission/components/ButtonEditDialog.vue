@@ -31,16 +31,17 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator"
+import {Component, Inject, InjectReactive, Prop, Vue} from "vue-property-decorator"
 import HyDialog from "@/components/HyDialog/HyDialog.vue";
 import permissionService from "@/api/permissionService";
 import {RoleModel} from "@/model/permission.model";
+import {ElForm} from "element-ui/types/form";
 
 class PermissionButtonItem {
-  name:string = '';
-  remarks:string = '';
-  isEnable:boolean = true;
-  permissionRoles:number[] = [];
+  name: string = '';
+  remarks: string = '';
+  isEnable: boolean = true;
+  permissionRoles: number[] = [];
 }
 
 @Component({
@@ -62,21 +63,11 @@ export default class ButtonEditDialog extends Vue {
   /**
    * 角色相关
    */
-  roleList: RoleModel[] = [];
+  @InjectReactive('allRoleList') roleList!: RoleModel[];
   roleCheckAll: boolean = false;
   isIndeterminate: boolean = false;
 
-  created() {
-    this.getAllRole();
-  };
-
-  getAllRole() {
-    permissionService.getAllRole().then(res => {
-      this.roleList = res.data
-    })
-  };
-
-  openDialog({menuId, permissionButtonItem}:{menuId:number, permissionButtonItem:PermissionButtonItem}): void {
+  openDialog({menuId, permissionButtonItem}: { menuId: number, permissionButtonItem: PermissionButtonItem }): void {
     //初始化表单
     this.formData = new PermissionButtonItem();
 
@@ -93,6 +84,7 @@ export default class ButtonEditDialog extends Vue {
   };
 
   closeDialog() {
+    (this.$refs['form'] as ElForm).resetFields();
     this.dialogVisible = false;
   };
 

@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator"
+import {Component, InjectReactive, Vue} from "vue-property-decorator"
 import HyDialog from "@/components/HyDialog/HyDialog.vue";
 import {addRouterMode, RouterModel} from "@/model/router.model";
 import routerService from "@/api/routerService";
@@ -58,6 +58,7 @@ import {elValidateAlphabetNumber} from "@/utils/validateEl";
 import {RoleModel} from "@/model/permission.model";
 import COMPONENT_LIST from "@/constant/componentList"
 import SvgSelectionDialog from "@/components/SvgIcon/SvgSelectionDialog.vue";
+import {ElForm} from "element-ui/types/form";
 
 class Router {
   id = 0;
@@ -103,23 +104,13 @@ export default class MenuEditDialog extends Vue {
   /**
    * 角色相关
    */
-  roleList: RoleModel[] = [];
+  @InjectReactive('allRoleList') roleList!:RoleModel[];
   roleCheckAll: boolean = false;
   checkedRoles: number[] = [];
   isIndeterminate: boolean = false;
 
-  created() {
-    this.getAllRole();
-  };
-
   get isNew(): boolean {
     return !!this.parentId
-  };
-
-  getAllRole() {
-    permissionService.getAllRole().then(res => {
-      this.roleList = res.data
-    })
   };
 
   getPermissionRole() {
@@ -149,6 +140,8 @@ export default class MenuEditDialog extends Vue {
   };
 
   closeDialog() {
+    (this.$refs['form'] as ElForm).resetFields();
+    (this.$refs['formMeta'] as ElForm).resetFields();
     this.dialogVisible = false;
   };
 
@@ -172,8 +165,8 @@ export default class MenuEditDialog extends Vue {
   }
 
   handleConfirm() {
-    (this.$refs.form as any).validate((valid: boolean) => {
-      (this.$refs.formMeta as any).validate((valid2: boolean) => {
+    (this.$refs.form as ElForm).validate((valid: boolean) => {
+      (this.$refs.formMeta as ElForm).validate((valid2: boolean) => {
         if (valid && valid2) {
           this.saveForm();
         }

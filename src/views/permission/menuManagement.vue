@@ -55,12 +55,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Vue} from "vue-property-decorator"
+import {Component, Prop, Provide, ProvideReactive, Vue} from "vue-property-decorator"
 import MenuEditDialog from "./components/MenuEditDialog.vue";
 import ButtonPermission from "./components/ButtonPermission.vue";
 import routerService from "@/api/routerService";
 import {RouterModel} from "@/model/router.model";
 import {cloneDeep} from "lodash"
+import menusService from "@/api/menusService";
+import permissionService from "@/api/permissionService";
+import {RoleModel} from "@/model/permission.model";
 
 @Component({
   components: {MenuEditDialog, ButtonPermission}
@@ -70,14 +73,22 @@ export default class menuManagement extends Vue {
   routeList: RouterModel[] = [];
 
   currentMenuId:number = 0;
+  @ProvideReactive('allRoleList') allRoleList:RoleModel[] = [];
 
   created() {
     this.getData();
+    this.getAllRoleData();
   };
 
   getData(): void {
-    routerService.getRouterList().then(res => {
+    menusService.getMenusList().then(res => {
       this.routeList = res.data;
+    })
+  };
+
+  getAllRoleData(){
+    permissionService.getAllRole().then(res => {
+      this.allRoleList = res.data
     })
   };
 

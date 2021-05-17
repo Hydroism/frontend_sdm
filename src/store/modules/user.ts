@@ -63,6 +63,20 @@ const actions = {
     })
   },
 
+  resetToken({commit}: ActionContext<any, any>){
+    return new Promise(async resolve => {
+      //clear userInfo
+      commit('SET_TOKEN', '');
+      commit('SET_AVATAR', '');
+      commit('SET_ROLES', []);
+      commit('SET_ROLE_PERMISSION', '');
+
+      removeToken();
+
+      resolve();
+    })
+  },
+
   getUserInfo({commit}: ActionContext<any, any>) {
     return new Promise((resolve, reject) => {
       userService.getUserInfo().then(res => {

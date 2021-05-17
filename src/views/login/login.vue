@@ -5,7 +5,7 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
         <el-form ref="loginForm" class="login-form" :model="loginFormData" :rules="loginRules" auto-complete="off" label-position="left">
           <div class="title">Hello !</div>
-          <div class="title-tips">欢迎来到 vue-element-admin !</div>
+          <div class="title-tips">欢迎来到 vue-element-permission !</div>
 
           <el-form-item prop="username">
             <span class="svg-container svg-container-admin">
@@ -47,8 +47,8 @@ import {Route} from "vue-router";
 @Component
 export default class login extends Vue {
   loginFormData: loginFormDataModel = {
-    username: 'admin',
-    password: '123456'
+    username: 'superman',
+    password: '12345678'
   };
   loginRules: object = {
     username: [
